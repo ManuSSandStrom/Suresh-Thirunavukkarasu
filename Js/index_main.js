@@ -53,6 +53,38 @@ function isPublicHttpUrl(value) {
     }
 }
 
+function getPublicBaseUrl() {
+    const candidates = [
+        profileData?.publicUrl,
+        profileData?.shareHref,
+        profileData?.website?.href,
+        window.location.protocol === "file:" ? "" : window.location.href
+    ];
+
+    return candidates.find((candidate) => isPublicHttpUrl(candidate)) || "";
+}
+
+function getPublicAssetUrl(path) {
+    if (!path) {
+        return "";
+    }
+
+    if (isPublicHttpUrl(path)) {
+        return path;
+    }
+
+    const publicBaseUrl = getPublicBaseUrl();
+    if (!publicBaseUrl) {
+        return "";
+    }
+
+    try {
+        return new URL(resolveAssetPath(path), publicBaseUrl).href;
+    } catch (error) {
+        return "";
+    }
+}
+
 function createContactItem(iconPath, label, href) {
     const item = document.createElement("a");
     item.className = "contact-item";
@@ -168,6 +200,7 @@ function triggerDownload(href, filename) {
 
 function getCardUrl() {
     const candidates = [
+        profileData?.publicUrl,
         profileData?.website?.href,
         profileData?.shareHref,
         window.location.protocol === "file:" ? "" : window.location.href
@@ -185,6 +218,36 @@ function getQrCodeUrl() {
     return shareUrl
         ? `https://api.qrserver.com/v1/create-qr-code/?size=320x320&margin=0&data=${encodeURIComponent(shareUrl)}`
         : "";
+}
+
+function updateMetaTag(selector, content) {
+    const node = document.querySelector(selector);
+    if (node && content) {
+        node.setAttribute("content", content);
+    }
+}
+
+function updateSocialMetadata() {
+    const pageTitle = profileData?.pageTitle || document.title;
+    const pageDescription = profileData?.pageDescription || "";
+    const pageUrl = getCardUrl();
+    const previewImage = getPublicAssetUrl(profileData?.previewImage || profileData?.profilePhoto);
+    const previewImageAlt = profileData?.previewImageAlt || `${getPlainName()} portrait`;
+
+    const canonicalLink = document.getElementById("canonical-link");
+    if (canonicalLink && pageUrl) {
+        canonicalLink.href = pageUrl;
+    }
+
+    updateMetaTag('meta[property="og:title"]', pageTitle);
+    updateMetaTag('meta[property="og:description"]', pageDescription);
+    updateMetaTag('meta[property="og:url"]', pageUrl);
+    updateMetaTag('meta[property="og:image"]', previewImage);
+    updateMetaTag('meta[property="og:image:alt"]', previewImageAlt);
+    updateMetaTag('meta[name="twitter:title"]', pageTitle);
+    updateMetaTag('meta[name="twitter:description"]', pageDescription);
+    updateMetaTag('meta[name="twitter:image"]', previewImage);
+    updateMetaTag('meta[name="twitter:image:alt"]', previewImageAlt);
 }
 
 function openModal(layerId) {
@@ -467,6 +530,8 @@ function populateCard() {
     if (faviconLink && data.favicon) {
         faviconLink.href = resolveAssetPath(data.favicon);
     }
+
+    updateSocialMetadata();
 
     setImage("banner-image", data.bannerImage, "Law office banner");
     setImage("profile-image", data.profilePhoto, "Suresh Thirunavukkarasu portrait");
