@@ -672,23 +672,23 @@ button {
 
 .share-modal-hero {
     position: relative;
-    min-height: 150px;
+    min-height: 142px;
     overflow: hidden;
     background: #101115;
 }
 
 .share-modal-banner {
     width: 100%;
-    height: 120px;
+    height: 112px;
     object-fit: cover;
 }
 
 .share-modal-avatar-frame {
     position: absolute;
     right: 18px;
-    top: 38px;
-    width: 102px;
-    height: 102px;
+    top: 34px;
+    width: 96px;
+    height: 96px;
     border-radius: 50%;
     background: #ffffff;
     padding: 6px;
@@ -705,7 +705,7 @@ button {
 
 .share-modal-body {
     position: relative;
-    padding: 18px 20px 24px;
+    padding: 16px 18px 20px;
 }
 
 .share-modal-body::before {
@@ -725,8 +725,8 @@ button {
 }
 
 .share-modal-title {
-    max-width: 290px;
-    font-size: 22px;
+    max-width: 278px;
+    font-size: 21px;
     line-height: 1.14;
     font-weight: 700;
     color: #1f1a16;
@@ -734,15 +734,15 @@ button {
 
 .share-modal-subrole {
     margin-top: 6px;
-    font-size: 15px;
+    font-size: 14px;
     line-height: 1.25;
     font-weight: 600;
     color: var(--accent);
 }
 
 .share-modal-qr-shell {
-    margin-top: 18px;
-    padding: 18px 0 16px;
+    margin-top: 16px;
+    padding: 16px 0 14px;
     border-top: 1px solid var(--divider);
     border-bottom: 1px solid var(--divider);
     display: flex;
@@ -750,45 +750,45 @@ button {
 }
 
 .share-modal-qr {
-    width: min(100%, 276px);
+    width: min(100%, 252px);
     aspect-ratio: 1;
     object-fit: contain;
     background: #ffffff;
 }
 
 .share-modal-tool-row {
-    margin-top: 18px;
+    margin-top: 14px;
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 48px;
+    grid-template-columns: minmax(0, 1fr) 44px;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
 }
 
 .copy-url-button {
     width: 100%;
-    min-height: 54px;
-    padding: 8px 14px;
+    min-height: 48px;
+    padding: 8px 12px;
     border-radius: 999px;
     background: #f4f1ea;
     display: inline-flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     justify-content: flex-start;
     color: #151515;
-    font-size: 18px;
+    font-size: 16px;
     line-height: 1.2;
     font-weight: 700;
 }
 
 .copy-url-button img {
-    width: 44px;
-    height: 44px;
-    flex: 0 0 44px;
+    width: 34px;
+    height: 34px;
+    flex: 0 0 34px;
 }
 
 .icon-asset-button {
-    width: 46px;
-    height: 46px;
+    width: 42px;
+    height: 42px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -802,8 +802,8 @@ button {
 }
 
 .share-modal-share-row {
-    margin-top: 20px;
-    padding-top: 16px;
+    margin-top: 16px;
+    padding-top: 12px;
     border-top: 1px solid var(--divider);
     display: flex;
     align-items: center;
@@ -812,7 +812,7 @@ button {
 }
 
 .share-modal-share-title {
-    font-size: 18px;
+    font-size: 16px;
     line-height: 1.2;
     font-weight: 700;
     color: #15322d;
@@ -1016,27 +1016,31 @@ button {
     }
 
     .law-modal {
-        width: min(calc(100vw - 24px), 430px);
-        max-height: calc(100dvh - 28px);
+        width: min(calc(100vw - 24px), 400px);
+        max-height: calc(100dvh - 32px);
         border-radius: 24px;
         margin: 0 auto;
     }
 
+    .share-modal {
+        width: min(calc(100vw - 24px), 382px);
+    }
+
     .share-modal-avatar-frame {
-        width: 92px;
-        height: 92px;
+        width: 86px;
+        height: 86px;
         right: 16px;
-        top: 36px;
+        top: 32px;
     }
 
     .share-modal-title {
-        font-size: 22px;
+        font-size: 20px;
     }
 
     .exchange-modal {
-        width: min(calc(100vw - 28px), 362px);
+        width: min(calc(100vw - 28px), 338px);
         max-height: calc(100dvh - 32px);
-        padding: 18px 16px 16px;
+        padding: 16px 14px 14px;
         border-radius: 22px;
     }
 
@@ -1046,26 +1050,26 @@ button {
 
     .exchange-modal-title {
         max-width: none;
-        font-size: 18px;
+        font-size: 17px;
         line-height: 1.15;
     }
 
     .exchange-form {
-        margin-top: 12px;
-    }
-
-    .exchange-field + .exchange-field {
         margin-top: 10px;
     }
 
+    .exchange-field + .exchange-field {
+        margin-top: 8px;
+    }
+
     .exchange-field input {
-        height: 50px;
-        padding: 0 15px;
+        height: 46px;
+        padding: 0 14px;
         font-size: 15px;
     }
 
     .exchange-actions {
-        margin-top: 14px;
+        margin-top: 12px;
         gap: 8px;
     }
 
@@ -1215,9 +1219,9 @@ button {
     }
 
     .law-modal {
-        width: min(calc(100vw - 24px), 410px);
-        max-height: calc(100dvh - 28px);
-        border-radius: 24px;
+        width: min(calc(100vw - 26px), 360px);
+        max-height: calc(100dvh - 32px);
+        border-radius: 22px;
     }
 
     .modal-close {
@@ -1228,78 +1232,78 @@ button {
     }
 
     .share-modal-body {
-        padding: 14px 18px 18px;
+        padding: 12px 16px 16px;
     }
 
     .share-modal-hero {
-        min-height: 118px;
+        min-height: 108px;
     }
 
     .share-modal-banner {
-        height: 92px;
+        height: 84px;
     }
 
     .share-modal-avatar-frame {
-        width: 84px;
-        height: 84px;
-        right: 14px;
-        top: 30px;
+        width: 76px;
+        height: 76px;
+        right: 12px;
+        top: 24px;
         padding: 4px;
     }
 
     .share-modal-title {
-        max-width: 250px;
-        font-size: 18px;
+        max-width: 220px;
+        font-size: 17px;
         line-height: 1.15;
     }
 
     .share-modal-subrole {
         margin-top: 4px;
-        font-size: 14px;
+        font-size: 13px;
     }
 
     .share-modal-qr-shell {
-        margin-top: 16px;
-        padding: 16px 0;
+        margin-top: 14px;
+        padding: 14px 0 12px;
     }
 
     .share-modal-qr {
-        width: min(100%, 270px);
+        width: min(100%, 228px);
     }
 
     .share-modal-tool-row {
-        margin-top: 14px;
-        grid-template-columns: minmax(0, 1fr) 42px;
-        gap: 10px;
+        margin-top: 12px;
+        grid-template-columns: minmax(0, 1fr) 38px;
+        gap: 8px;
     }
 
     .copy-url-button {
-        min-height: 46px;
+        min-height: 42px;
         padding-inline: 10px;
-        gap: 10px;
-        font-size: 14px;
+        gap: 8px;
+        font-size: 13px;
         line-height: 1.15;
     }
 
     .copy-url-button img {
-        width: 34px;
-        height: 34px;
-        flex-basis: 34px;
+        width: 28px;
+        height: 28px;
+        flex-basis: 28px;
     }
 
     .icon-asset-button,
     .icon-asset-button img {
-        width: 40px;
-        height: 40px;
+        width: 38px;
+        height: 38px;
     }
 
     .share-modal-share-row {
-        margin-top: 14px;
-        padding-top: 12px;
+        margin-top: 12px;
+        padding-top: 10px;
         display: grid;
         grid-template-columns: auto 1fr;
         align-items: center;
-        gap: 12px;
+        gap: 10px;
     }
 
     .share-modal-share-title {
@@ -1308,23 +1312,23 @@ button {
 
     .share-modal-links {
         justify-content: flex-end;
-        gap: 10px;
+        gap: 8px;
     }
 
     .modal-share-link {
-        width: 36px;
-        height: 36px;
+        width: 34px;
+        height: 34px;
     }
 
     .modal-share-link img {
-        width: 19px;
-        height: 19px;
+        width: 18px;
+        height: 18px;
     }
 
     .exchange-modal {
-        width: min(calc(100vw - 24px), 350px);
-        max-height: calc(100dvh - 28px);
-        padding: 16px 14px 14px;
+        width: min(calc(100vw - 28px), 320px);
+        max-height: calc(100dvh - 32px);
+        padding: 14px 12px 12px;
         border-radius: 20px;
     }
 
@@ -1334,17 +1338,17 @@ button {
 
     .exchange-modal-title {
         max-width: none;
-        font-size: 17px;
+        font-size: 16px;
         line-height: 1.14;
     }
 
     .exchange-form {
-        margin-top: 10px;
+        margin-top: 8px;
         padding-inline: 0;
     }
 
     .exchange-field + .exchange-field {
-        margin-top: 9px;
+        margin-top: 8px;
     }
 
     .exchange-field input {

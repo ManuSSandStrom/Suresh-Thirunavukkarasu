@@ -274,7 +274,7 @@ function updateSocialMetadata() {
     const pageTitle = profileData?.pageTitle || document.title;
     const pageDescription = profileData?.pageDescription || "";
     const pageUrl = getCardUrl();
-    const previewImage = getPublicAssetUrl(profileData?.previewImage || profileData?.profilePhoto);
+    const previewImage = profileData?.previewImagePublicUrl || getPublicAssetUrl(profileData?.previewImage || profileData?.profilePhoto);
     const previewImageAlt = profileData?.previewImageAlt || `${getPlainName()} portrait`;
 
     const canonicalLink = document.getElementById("canonical-link");
@@ -282,11 +282,17 @@ function updateSocialMetadata() {
         canonicalLink.href = pageUrl;
     }
 
+    updateMetaTag('meta[name="twitter:card"]', "summary_large_image");
     updateMetaTag('meta[property="og:title"]', pageTitle);
     updateMetaTag('meta[property="og:description"]', pageDescription);
     updateMetaTag('meta[property="og:url"]', pageUrl);
     updateMetaTag('meta[property="og:image"]', previewImage);
+    updateMetaTag('meta[property="og:image:secure_url"]', previewImage);
+    updateMetaTag('meta[property="og:image:type"]', "image/png");
+    updateMetaTag('meta[property="og:image:width"]', "630");
+    updateMetaTag('meta[property="og:image:height"]', "630");
     updateMetaTag('meta[property="og:image:alt"]', previewImageAlt);
+    updateMetaTag('meta[name="twitter:url"]', pageUrl);
     updateMetaTag('meta[name="twitter:title"]', pageTitle);
     updateMetaTag('meta[name="twitter:description"]', pageDescription);
     updateMetaTag('meta[name="twitter:image"]', previewImage);
