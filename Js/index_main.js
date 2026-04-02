@@ -119,8 +119,8 @@ function setLink(id, href, text) {
     }
 }
 
-function setActionStatus(message) {
-    const statusNode = document.getElementById("action-status");
+function setStatus(nodeId, message) {
+    const statusNode = document.getElementById(nodeId);
     if (!statusNode) {
         return;
     }
@@ -136,23 +136,6 @@ function setActionStatus(message) {
     }, 20);
 }
 
-async function fetchContactFile() {
-    if (!profileData?.vcardFile) {
-        return null;
-    }
-
-    const fileUrl = resolveAssetPath(profileData.vcardFile);
-    const response = await fetch(fileUrl);
-    if (!response.ok) {
-        throw new Error("Unable to load contact file");
-    }
-
-    const blob = await response.blob();
-    return new File([blob], "Suresh-Thirunavukkarasu.vcf", {
-        type: blob.type || "text/vcard"
-    });
-}
-
 function triggerDownload(href, filename) {
     const link = document.createElement("a");
     link.href = href;
@@ -162,10 +145,74 @@ function triggerDownload(href, filename) {
     link.remove();
 }
 
-function downloadBlob(blob, filename) {
-    const blobUrl = URL.createObjectURL(blob);
-    triggerDownload(blobUrl, filename);
-    window.setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
+function getCardUrl() {
+    return profileData?.website?.href || profileData?.shareHref || window.location.href;
+}
+
+function getPlainName() {
+    return `${profileData?.officeName || ""}`.replace(/\s+/g, " ").trim() || "Suresh Thirunavukkarasu";
+}
+
+function getQrCodeUrl() {
+    return `https://api.qrserver.com/v1/create-qr-code/?size=320x320&margin=0&data=${encodeURIComponent(getCardUrl())}`;
+}
+
+function openModal(layerId) {
+    const layer = document.getElementById(layerId);
+    if (!layer) {
+        return;
+    }
+
+    layer.classList.remove("is-hidden");
+    layer.setAttribute("aria-hidden", "false");
+    document.body.classList.add("modal-open");
+
+    const focusTarget = layer.querySelector("button, input, a");
+    focusTarget?.focus();
+}
+
+function closeModal(layer) {
+    const targetLayer = typeof layer === "string" ? document.getElementById(layer) : layer;
+    if (!targetLayer) {
+        return;
+    }
+
+    targetLayer.classList.add("is-hidden");
+    targetLayer.setAttribute("aria-hidden", "true");
+
+    if (!document.querySelector(".modal-layer:not(.is-hidden)")) {
+        document.body.classList.remove("modal-open");
+    }
+}
+
+function bindModalDismissals() {
+    document.querySelectorAll("[data-close-modal]").forEach((node) => {
+        node.addEventListener("click", () => {
+            closeModal(node.closest(".modal-layer"));
+        });
+    });
+
+    window.addEventListener("keydown", (event) => {
+        if (event.key !== "Escape") {
+            return;
+        }
+
+        document.querySelectorAll(".modal-layer:not(.is-hidden)").forEach((layer) => {
+            closeModal(layer);
+        });
+    });
+}
+
+async function copyCardUrl() {
+    const shareUrl = getCardUrl();
+
+    if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(shareUrl);
+        setStatus("share-modal-status", "Digital card URL copied.");
+        return;
+    }
+
+    window.prompt("Copy this digital card URL", shareUrl);
 }
 
 async function saveContactCard() {
@@ -174,92 +221,157 @@ async function saveContactCard() {
     }
 
     triggerDownload(resolveAssetPath(profileData.vcardFile), "Suresh-Thirunavukkarasu.vcf");
-    setActionStatus("Contact file downloaded.");
+    setStatus("action-status", "Contact file downloaded.");
+    setStatus("share-modal-status", "Contact file downloaded.");
 }
 
-async function shareProfileCard() {
-    const shareUrl = profileData?.website?.href || profileData?.shareHref || window.location.href;
-    const shareData = {
-        title: profileData?.pageTitle || "Profile Card",
-        text: `${profileData?.officeName || profileData?.profession || "Profile"}${profileData?.officePhone?.label ? ` • ${profileData.officePhone.label}` : ""}`,
-        url: shareUrl
-    };
-
-    if (navigator.share) {
-        await navigator.share(shareData);
+function buildShareLinks() {
+    const container = document.getElementById("share-modal-links");
+    if (!container) {
         return;
     }
 
-    if (navigator.clipboard?.writeText) {
-        await navigator.clipboard.writeText(shareUrl);
-        setActionStatus("Profile link copied.");
-        return;
-    }
-
-    window.open(shareUrl, "_blank", "noopener,noreferrer");
-}
-
-async function exchangeContactCard() {
-    const fallbackHref = profileData?.exchangeContactHref || profileData?.email?.href || profileData?.website?.href;
-    const shareUrl = profileData?.website?.href || window.location.href;
-    const shareText = `${profileData?.officeName || "Profile"}${profileData?.officePhone?.label ? ` • ${profileData.officePhone.label}` : ""}`;
-
-    if (navigator.share) {
-        try {
-            const contactFile = await fetchContactFile();
-            if (contactFile && navigator.canShare?.({ files: [contactFile] })) {
-                await navigator.share({
-                    title: profileData?.pageTitle || "Contact Card",
-                    text: shareText,
-                    files: [contactFile],
-                    url: shareUrl
-                });
-                return;
-            }
-
-            await navigator.share({
-                title: profileData?.pageTitle || "Contact Card",
-                text: shareText,
-                url: shareUrl
-            });
-            return;
-        } catch (error) {
-            if (error?.name === "AbortError") {
-                return;
-            }
+    const shareUrl = getCardUrl();
+    const shareTitle = profileData?.pageTitle || "Digital Card";
+    const shareText = `${getPlainName()} ${shareUrl}`;
+    const links = [
+        {
+            icon: "whatsapp_icon.svg",
+            label: "Share via WhatsApp",
+            href: `https://wa.me/?text=${encodeURIComponent(shareText)}`
+        },
+        {
+            icon: "linkedin_icon.svg",
+            label: "Share via LinkedIn",
+            href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`
+        },
+        {
+            icon: "email_icon.svg",
+            label: "Share via Email",
+            href: `mailto:?subject=${encodeURIComponent(shareTitle)}&body=${encodeURIComponent(`Take a look at this digital card:\n${shareUrl}`)}`
+        },
+        {
+            icon: "global_icon.svg",
+            label: "Open digital card",
+            href: shareUrl
         }
+    ];
+
+    container.innerHTML = "";
+
+    links.forEach((item) => {
+        const link = document.createElement("a");
+        link.className = "modal-share-link";
+        link.href = item.href;
+        link.target = item.href.startsWith("mailto:") ? "_self" : "_blank";
+        link.rel = "noreferrer";
+        link.setAttribute("aria-label", item.label);
+
+        const icon = document.createElement("img");
+        icon.src = resolveAssetPath(item.icon);
+        icon.alt = "";
+
+        link.appendChild(icon);
+        container.appendChild(link);
+    });
+}
+
+function populateModals() {
+    setImage("share-modal-banner", profileData?.bannerImage, "");
+    setImage("share-modal-avatar", profileData?.profilePhoto, "Suresh Thirunavukkarasu portrait");
+
+    const shareModalTitle = document.getElementById("share-modal-title");
+    const shareBrandName = document.getElementById("share-modal-brand-name");
+    const shareBrandRole = document.getElementById("share-modal-brand-role");
+    const shareSubrole = document.getElementById("share-modal-subrole");
+    const exchangeCardLink = document.getElementById("exchange-card-link");
+    const qrNode = document.getElementById("share-modal-qr");
+
+    if (shareModalTitle) {
+        shareModalTitle.textContent = getPlainName();
     }
 
-    if (fallbackHref) {
-        window.location.href = fallbackHref;
+    if (shareBrandName) {
+        shareBrandName.textContent = getPlainName();
+    }
+
+    if (shareBrandRole) {
+        shareBrandRole.textContent = profileData?.profession || "Advocate";
+    }
+
+    if (shareSubrole) {
+        shareSubrole.textContent = profileData?.profession || "Advocate";
+    }
+
+    if (exchangeCardLink) {
+        exchangeCardLink.value = getCardUrl();
+    }
+
+    if (qrNode) {
+        qrNode.src = getQrCodeUrl();
+    }
+
+    buildShareLinks();
+}
+
+function submitExchangeForm(event) {
+    event.preventDefault();
+
+    const form = event.currentTarget;
+    if (!(form instanceof HTMLFormElement) || !form.reportValidity()) {
         return;
     }
 
-    await saveContactCard();
+    const formData = new FormData(form);
+    const name = `${formData.get("name") || ""}`.trim();
+    const mobile = `${formData.get("mobile") || ""}`.trim();
+    const email = `${formData.get("email") || ""}`.trim();
+    const company = `${formData.get("company") || ""}`.trim();
+    const digitalCard = `${formData.get("digital_card") || ""}`.trim() || getCardUrl();
+
+    const targetEmail = profileData?.email?.label || profileData?.officeEmail?.label || "";
+    const subject = `Exchange Contact - ${name}`;
+    const body = [
+        "Hello,",
+        "",
+        "Sharing my contact details with you:",
+        "",
+        `Name: ${name}`,
+        `Mobile: ${mobile}`,
+        `Email: ${email}`,
+        `Company Name: ${company || "-"}`,
+        `Digital Card: ${digitalCard}`,
+        "",
+        "Please share your contact card as well."
+    ].join("\n");
+
+    window.location.href = `mailto:${targetEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    setStatus("exchange-modal-status", "Opening your email app...");
+    closeModal("exchange-modal-layer");
+    form.reset();
+
+    const exchangeCardLink = document.getElementById("exchange-card-link");
+    if (exchangeCardLink) {
+        exchangeCardLink.value = getCardUrl();
+    }
 }
 
 function bindActionButtons() {
     const shareButton = document.getElementById("share-link");
     if (shareButton) {
-        shareButton.addEventListener("click", async () => {
-            try {
-                await shareProfileCard();
-            } catch (error) {
-                console.error(error);
-                setActionStatus("Unable to share profile right now.");
-            }
+        shareButton.addEventListener("click", () => {
+            populateModals();
+            setStatus("share-modal-status", "");
+            openModal("share-modal-layer");
         });
     }
 
     const exchangeButton = document.getElementById("exchange-contact-link");
     if (exchangeButton) {
-        exchangeButton.addEventListener("click", async () => {
-            try {
-                await exchangeContactCard();
-            } catch (error) {
-                console.error(error);
-                setActionStatus("Unable to exchange contact right now.");
-            }
+        exchangeButton.addEventListener("click", () => {
+            populateModals();
+            setStatus("exchange-modal-status", "");
+            openModal("exchange-modal-layer");
         });
     }
 
@@ -270,9 +382,57 @@ function bindActionButtons() {
                 await saveContactCard();
             } catch (error) {
                 console.error(error);
-                setActionStatus("Unable to download contact file.");
+                setStatus("action-status", "Unable to download contact file.");
             }
         });
+    }
+
+    const copyUrlButton = document.getElementById("copy-url-button");
+    if (copyUrlButton) {
+        copyUrlButton.addEventListener("click", async () => {
+            try {
+                await copyCardUrl();
+            } catch (error) {
+                console.error(error);
+                setStatus("share-modal-status", "Unable to copy digital card URL.");
+            }
+        });
+    }
+
+    const downloadPdfButton = document.getElementById("download-pdf-button");
+    if (downloadPdfButton) {
+        downloadPdfButton.addEventListener("click", () => {
+            window.print();
+        });
+    }
+
+    const shareAddContactButton = document.getElementById("share-add-contact-button");
+    if (shareAddContactButton) {
+        shareAddContactButton.addEventListener("click", async () => {
+            try {
+                await saveContactCard();
+            } catch (error) {
+                console.error(error);
+                setStatus("share-modal-status", "Unable to download contact file.");
+            }
+        });
+    }
+
+    const exchangeForm = document.getElementById("exchange-form");
+    if (exchangeForm) {
+        exchangeForm.addEventListener("submit", submitExchangeForm);
+    }
+}
+
+function handleModalHash() {
+    if (window.location.hash === "#share") {
+        populateModals();
+        openModal("share-modal-layer");
+    }
+
+    if (window.location.hash === "#exchange") {
+        populateModals();
+        openModal("exchange-modal-layer");
     }
 }
 
@@ -362,12 +522,16 @@ function populateCard() {
             window.print();
         });
     }
+
+    populateModals();
 }
 
 async function main() {
     await loadData();
     populateCard();
+    bindModalDismissals();
     bindActionButtons();
+    handleModalHash();
 }
 
 main().catch((error) => {

@@ -184,6 +184,100 @@
         </article>
     </main>
 
+    <div class="modal-layer is-hidden" id="share-modal-layer" aria-hidden="true">
+        <div class="modal-backdrop" data-close-modal></div>
+        <section class="law-modal share-modal" role="dialog" aria-modal="true" aria-labelledby="share-modal-title">
+            <button class="modal-close" type="button" data-close-modal aria-label="Close dialog">×</button>
+
+            <div class="share-modal-hero">
+                <img class="share-modal-banner" id="share-modal-banner" src="./Assets/Banner.svg" alt="">
+                <div class="share-modal-brand">
+                    <img class="share-modal-brand-icon" src="./Assets/LawIcon.svg" alt="">
+                    <div class="share-modal-brand-copy">
+                        <p class="share-modal-brand-name" id="share-modal-brand-name">Suresh Thirunavukkarasu</p>
+                        <p class="share-modal-brand-role" id="share-modal-brand-role">Advocate</p>
+                    </div>
+                </div>
+                <div class="share-modal-avatar-frame">
+                    <img id="share-modal-avatar" src="./Assets/Profile/+918825498580.png" alt="Suresh Thirunavukkarasu portrait">
+                </div>
+            </div>
+
+            <div class="share-modal-body">
+                <h2 class="share-modal-title" id="share-modal-title">Suresh Thirunavukkarasu</h2>
+                <p class="share-modal-subrole" id="share-modal-subrole">Advocate</p>
+
+                <div class="share-modal-qr-shell">
+                    <img class="share-modal-qr" id="share-modal-qr" src="" alt="QR code for digital card">
+                </div>
+
+                <div class="share-modal-tool-row">
+                    <button class="copy-url-button" id="copy-url-button" type="button">
+                        <img src="./Assets/QRCode_Icon.svg" alt="">
+                        <span>Copy Digital Card URL</span>
+                    </button>
+                    <button class="icon-asset-button" id="download-pdf-button" type="button" aria-label="Download profile PDF">
+                        <img src="./Assets/PDF_Icon.svg" alt="Download profile PDF">
+                    </button>
+                </div>
+
+                <div class="share-modal-secondary-row">
+                    <button class="asset-inline-button" id="share-add-contact-button" type="button" aria-label="Add to contacts">
+                        <img src="./Assets/AddtoContacts.svg" alt="Add to contacts">
+                    </button>
+                </div>
+
+                <div class="share-modal-share-row">
+                    <h3 class="share-modal-share-title">Share</h3>
+                    <div class="share-modal-links" id="share-modal-links"></div>
+                </div>
+
+                <p class="modal-status" id="share-modal-status" aria-live="polite"></p>
+            </div>
+        </section>
+    </div>
+
+    <div class="modal-layer is-hidden" id="exchange-modal-layer" aria-hidden="true">
+        <div class="modal-backdrop" data-close-modal></div>
+        <section class="law-modal exchange-modal" role="dialog" aria-modal="true" aria-labelledby="exchange-modal-title">
+            <button class="modal-close" type="button" data-close-modal aria-label="Close dialog">×</button>
+            <div class="exchange-modal-head">
+                <img class="exchange-modal-icon" src="./Assets/LawIcon.svg" alt="">
+                <h2 class="exchange-modal-title" id="exchange-modal-title">Exchange your contact with me</h2>
+            </div>
+
+            <form class="exchange-form" id="exchange-form">
+                <label class="exchange-field">
+                    <span class="visually-hidden">Name</span>
+                    <input id="exchange-name" name="name" type="text" placeholder="Name" autocomplete="name" required>
+                </label>
+                <label class="exchange-field">
+                    <span class="visually-hidden">Mobile</span>
+                    <input id="exchange-mobile" name="mobile" type="tel" placeholder="Mobile" inputmode="tel" autocomplete="tel" required>
+                </label>
+                <label class="exchange-field">
+                    <span class="visually-hidden">Email</span>
+                    <input id="exchange-email" name="email" type="email" placeholder="Email" autocomplete="email" required>
+                </label>
+                <label class="exchange-field">
+                    <span class="visually-hidden">Company Name</span>
+                    <input id="exchange-company" name="company" type="text" placeholder="Company Name" autocomplete="organization">
+                </label>
+                <label class="exchange-field">
+                    <span class="visually-hidden">Digital card</span>
+                    <input id="exchange-card-link" name="digital_card" type="url" placeholder="Digital card" inputmode="url">
+                </label>
+
+                <div class="exchange-actions">
+                    <button class="exchange-action exchange-action-primary" type="submit">Submit</button>
+                    <button class="exchange-action exchange-action-secondary" type="button" data-close-modal>Cancel</button>
+                </div>
+            </form>
+
+            <p class="modal-status" id="exchange-modal-status" aria-live="polite"></p>
+        </section>
+    </div>
+
     <script src="./Js/index_main.js"></script>
 </body>
 </html>
