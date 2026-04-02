@@ -45,6 +45,8 @@
     --contact-bottom-gap: 24px;
     --contact-row-gap: 8px;
     --top-socials-width: 72px;
+    --top-socials-gap: 8px;
+    --top-socials-right-gap: 10px;
     --phone-text-size: 20px;
     --phone-text-line: 26px;
     --action-block-height: 90px;
@@ -337,12 +339,13 @@ button {
 
 .top-socials {
     display: flex;
-    width: var(--top-socials-width);
+    width: auto;
     align-items: center;
-    justify-content: space-between;
-    gap: 0;
+    justify-content: flex-end;
+    gap: var(--top-socials-gap);
     align-self: start;
     margin-top: 1px;
+    padding-right: var(--top-socials-right-gap);
 }
 
 .social-icon-link {
