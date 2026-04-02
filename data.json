@@ -1,0 +1,83 @@
+{
+    "assetBasePath": "./Assets",
+    "pageTitle": "Suresh Thirunavukkarasu | Advocate",
+    "pageDescription": "Digital profile card for Advocate Suresh Thirunavukkarasu.",
+    "favicon": "favicon.svg",
+    "bannerImage": "Banner.svg",
+    "profilePhoto": "Profile/+918825498580.png",
+    "lawIcon": "LawIcon.svg",
+    "nameHtml": "Suresh<br>Thirunavukkarasu",
+    "degree": "B.C.A., B.L.,",
+    "profession": "Advocate",
+    "practiceArea": "Civil",
+    "summary": "Seeking challanging assignments in Legal Affairs with a reputed organization where I can become an indispensable contributor.",
+    "phones": [
+        {
+            "label": "+91 882 549 8580",
+            "href": "tel:+918825498580"
+        },
+        {
+            "label": "+91 995 258 5205",
+            "href": "tel:+919952585205"
+        }
+    ],
+    "email": {
+        "label": "suresh.thirumalar@gmail.com",
+        "href": "mailto:suresh.thirumalar@gmail.com"
+    },
+    "topSocials": [
+        {
+            "icon": "linkedin_icon.svg",
+            "label": "LinkedIn",
+            "href": "https://www.linkedin.com/"
+        },
+        {
+            "icon": "whatsapp_icon.svg",
+            "label": "WhatsApp",
+            "href": "https://wa.me/918825498580"
+        }
+    ],
+    "shareHref": "https://www.lawmines.com/",
+    "exchangeContactHref": "mailto:suresh.thirumalar@gmail.com?subject=Exchange%20Contact",
+    "vcardFile": "Profile/+918825498580.vcf",
+    "services": [
+        "Arbitration and Conciliation",
+        "Consultation & Advice",
+        "Litigation",
+        "Document Services",
+        "Legal Advisor to Financial Institution",
+        "Legal Advisor to Insurance Company"
+    ],
+    "officeName": "Suresh Thirunavukkarasu",
+    "officeAddressHtml": "No.19, Poosali Ramaswamy Street,<br>Kaveripakkam, Nemili Taluk,<br>Ranipet District.",
+    "officePhone": {
+        "label": "+91 882 549 8580",
+        "href": "tel:+918825498580"
+    },
+    "officeEmail": {
+        "label": "sureshassociates@gmail.com",
+        "href": "mailto:sureshassociates@gmail.com"
+    },
+    "mapLink": "https://maps.google.com/?q=No.19+Poosali+Ramaswamy+Street+Kaveripakkam+Nemili+Taluk+Ranipet+District",
+    "website": {
+        "label": "www.lawmines.com",
+        "href": "https://www.lawmines.com/"
+    },
+    "bottomSocials": [
+        {
+            "icon": "linkedin_icon.svg",
+            "label": "LinkedIn",
+            "href": "https://www.linkedin.com/"
+        },
+        {
+            "icon": "Instagram_icon.svg",
+            "label": "Instagram",
+            "href": "https://www.instagram.com/"
+        },
+        {
+            "icon": "youtube_icon.svg",
+            "label": "YouTube",
+            "href": "https://www.youtube.com/"
+        }
+    ]
+}

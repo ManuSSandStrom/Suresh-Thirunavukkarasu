@@ -1,0 +1,564 @@
+:root {
+    --page-bg: #151515;
+    --card-bg: #ffffff;
+    --text-main: #2b221b;
+    --text-subtle: #9f9f9f;
+    --text-body: #5c5c5c;
+    --text-link: #344c72;
+    --accent: #d19a1f;
+    --divider: #ececec;
+    --shadow: 0 18px 48px rgba(0, 0, 0, 0.22);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    min-height: 100%;
+}
+
+body {
+    font-family: "Roboto", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--page-bg);
+    color: var(--text-main);
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("../Assets/LawPattern.svg");
+    background-repeat: repeat;
+    background-size: 155px 160px;
+    opacity: 0.14;
+    pointer-events: none;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    border: 0;
+    background: transparent;
+    font: inherit;
+    cursor: pointer;
+}
+
+.page-shell {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 14px 12px 24px;
+    position: relative;
+    z-index: 1;
+}
+
+.profile-card {
+    width: min(100%, 500px);
+    background: var(--card-bg);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    align-self: flex-start;
+}
+
+.hero-section {
+    position: relative;
+    height: 180px;
+    overflow: visible;
+}
+
+.hero-banner {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.avatar-frame {
+    position: absolute;
+    top: 129px;
+    right: 30px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: #ffffff;
+    padding: 6px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.avatar-frame img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 0 30px 24px;
+}
+
+.intro-section {
+    position: relative;
+    padding: 30px 0 26px;
+}
+
+.intro-copy {
+    max-width: 245px;
+}
+
+.profile-name {
+    font-size: 32px;
+    line-height: 38px;
+    font-weight: 700;
+    letter-spacing: 0;
+    color: #331603;
+}
+
+.profile-degree {
+    margin-top: 8px;
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 500;
+    color: rgba(30, 30, 30, 0.7);
+    letter-spacing: 0;
+}
+
+.intro-law-icon {
+    position: absolute;
+    right: 42px;
+    top: 82px;
+    width: 34px;
+    height: 40px;
+}
+
+.content-section {
+    border-top: 1px solid var(--divider);
+}
+
+.role-section {
+    padding: 18px 0 16px;
+}
+
+.role-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.role-title {
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 700;
+    color: #272727;
+}
+
+.practice-tag {
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0;
+}
+
+.profile-summary {
+    margin-top: 12px;
+    max-width: 412px;
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 400;
+    color: #313131;
+}
+
+.contact-section {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 16px;
+    padding: 16px 0 18px;
+}
+
+.contact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.contact-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-link);
+    min-height: 34px;
+}
+
+.contact-icon {
+    width: 24px;
+    height: 24px;
+    flex: 0 0 24px;
+    opacity: 0.38;
+}
+
+.contact-text {
+    font-size: 18px;
+    line-height: 34px;
+    font-weight: 700;
+}
+
+.top-socials {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    align-self: center;
+}
+
+.social-icon-link {
+    width: 24px;
+    height: 24px;
+}
+
+.action-section {
+    min-height: 90px;
+    padding: 22px 0;
+    display: flex;
+    align-items: center;
+}
+
+.action-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.asset-button {
+    display: block;
+}
+
+.icon-tile-link {
+    width: 44px;
+    height: 44px;
+    flex: 0 0 44px;
+}
+
+.exchange-button {
+    width: 189.2px;
+    flex: 0 0 189.2px;
+}
+
+.save-button {
+    width: 179.07px;
+    flex: 0 0 179.07px;
+}
+
+.service-section {
+    min-height: 216px;
+    padding: 18px 0 18px;
+}
+
+.service-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    width: 346px;
+    margin-left: 10px;
+}
+
+.service-list li {
+    position: relative;
+    padding-left: 16px;
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 700;
+    color: #444444;
+}
+
+.service-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+}
+
+.download-section {
+    min-height: 70px;
+    padding: 13px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.download-profile-button {
+    width: 440px;
+    max-width: 100%;
+}
+
+.office-section {
+    min-height: 172px;
+    padding: 18px 0 16px;
+}
+
+.office-section > * {
+    width: 340px;
+    max-width: 100%;
+    margin-left: 10px;
+}
+
+.office-name {
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.office-address {
+    margin-top: 8px;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 700;
+    color: #5e5e5e;
+}
+
+.office-phone,
+.office-email {
+    display: block;
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 1.25;
+    font-weight: 700;
+    color: #3f3f3f;
+}
+
+.office-email {
+    margin-top: 4px;
+}
+
+.bottom-social-section {
+    min-height: 70px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.bottom-social-section > * {
+    margin-top: 0;
+}
+
+.map-link {
+    width: 25px;
+    flex: 0 0 25px;
+    margin-left: 10px;
+}
+
+.bottom-socials {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-right: 0;
+}
+
+.bottom-social-link {
+    width: 24px;
+    height: 24px;
+}
+
+.website-section {
+    min-height: 70px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.website-link {
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 700;
+    color: #3f3f3f;
+    margin-left: 10px;
+}
+
+.footer-section {
+    min-height: 90px;
+    padding: 0;
+    border-top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.powered-by-group {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+    justify-content: center;
+}
+
+.powered-by-text {
+    width: 83.052px;
+}
+
+.powered-by-lawmines {
+    width: 116.818px;
+}
+
+.powered-by-good {
+    width: 112.437px;
+}
+
+@media (max-width: 520px) {
+    .page-shell {
+        padding-inline: 8px;
+    }
+
+    .card-body {
+        padding-inline: 20px;
+    }
+
+    .intro-copy {
+        max-width: 250px;
+    }
+
+    .profile-name {
+        font-size: 30px;
+        line-height: 36px;
+    }
+
+    .profile-summary {
+        max-width: 100%;
+    }
+
+    .service-list {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .office-section > * {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .exchange-button,
+    .save-button {
+        flex: 1 1 0;
+        width: auto;
+    }
+}
+
+@media (max-width: 430px) {
+    .page-shell {
+        padding-top: 0;
+        padding-inline: 0;
+    }
+
+    .profile-card {
+        border-radius: 20px 20px 18px 18px;
+    }
+
+    .card-body {
+        padding-inline: 16px;
+    }
+
+    .avatar-frame {
+        top: 126px;
+        right: 20px;
+        width: 104px;
+        height: 104px;
+    }
+
+    .intro-law-icon {
+        right: 30px;
+        top: 86px;
+        width: 30px;
+        height: 35px;
+    }
+
+    .profile-name {
+        font-size: 24px;
+        line-height: 30px;
+    }
+
+    .profile-degree,
+    .role-title,
+    .practice-tag,
+    .profile-summary,
+    .contact-text,
+    .service-list li {
+        font-size: 16px;
+        line-height: 22px;
+    }
+
+    .contact-section {
+        grid-template-columns: 1fr;
+    }
+
+    .top-socials {
+        align-self: start;
+        justify-content: flex-end;
+    }
+
+    .action-row {
+        flex-wrap: wrap;
+    }
+
+    .icon-tile-link,
+    .exchange-button,
+    .save-button {
+        width: 100%;
+        flex: 1 1 100%;
+    }
+
+    .map-link,
+    .website-link {
+        margin-left: 0;
+    }
+
+    .powered-by-group {
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+@media print {
+    @page {
+        margin: 0;
+        size: auto;
+    }
+
+    body {
+        background: #ffffff;
+    }
+
+    body::before {
+        display: none;
+    }
+
+    .page-shell {
+        display: block;
+        padding: 0;
+    }
+
+    .profile-card {
+        width: 500px;
+        margin: 0 auto;
+        box-shadow: none;
+    }
+}

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="44" height="44" viewBox="0 0 44 44">
+  <defs>
+    <filter id="Path_195107" x="9.5" y="9.5" width="27" height="27" filterUnits="userSpaceOnUse">
+      <feOffset dx="1" dy="1" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="0.5" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Share_icon" transform="translate(-0.145 0.46)">
+    <path id="Path_217571" data-name="Path 217571" d="M10,0H34A10,10,0,0,1,44,10V34A10,10,0,0,1,34,44H10A10,10,0,0,1,0,34V10A10,10,0,0,1,10,0Z" transform="translate(0.145 -0.46)" fill="#cf9115"/>
+    <g transform="matrix(1, 0, 0, 1, 0.14, -0.46)" filter="url(#Path_195107)">
+      <path id="Path_195107-2" data-name="Path 195107" d="M3,13.667H5.667v2.667H3V13.667m10.667-8h2.667V11H13.667V5.667m-2.667,8h5.333V19H13.667V16.333H11V13.667m8,0h2.667v2.667h2.667V13.667H27v2.667H24.333V19H27v5.333H24.333V27H21.667V24.333H16.333V27H13.667V21.667H19V19h2.667V16.333H19V13.667m5.333,10.667V19H21.667v5.333h2.667M19,3h8v8H19V3m2.667,2.667V8.333h2.667V5.667H21.667M3,3h8v8H3V3M5.667,5.667V8.333H8.333V5.667H5.667M3,19h8v8H3V19m2.667,2.667v2.667H8.333V21.667Z" transform="translate(7 7)" fill="#fff"/>
+    </g>
+  </g>
+</svg>
