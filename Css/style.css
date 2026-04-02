@@ -44,9 +44,9 @@
     --contact-top-gap: 21px;
     --contact-bottom-gap: 24px;
     --contact-row-gap: 8px;
-    --top-socials-width: 72px;
-    --top-socials-gap: 8px;
-    --top-socials-right-gap: 10px;
+    --top-socials-width: 75px;
+    --top-socials-height: 30px;
+    --top-socials-gap: 7px;
     --phone-text-size: 20px;
     --phone-text-line: 26px;
     --action-block-height: 90px;
@@ -339,13 +339,13 @@ button {
 
 .top-socials {
     display: flex;
-    width: auto;
+    width: var(--top-socials-width);
+    min-height: var(--top-socials-height);
     align-items: center;
     justify-content: flex-end;
     gap: var(--top-socials-gap);
     align-self: start;
     margin-top: 1px;
-    padding-right: var(--top-socials-right-gap);
 }
 
 .social-icon-link {
