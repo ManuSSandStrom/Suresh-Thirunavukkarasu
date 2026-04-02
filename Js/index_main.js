@@ -277,26 +277,16 @@ function buildShareLinks() {
 }
 
 function populateModals() {
-    setImage("share-modal-banner", profileData?.bannerImage, "");
+    setImage("share-modal-banner", profileData?.shareBannerImage || "QRCode_Banner.svg", "");
     setImage("share-modal-avatar", profileData?.profilePhoto, "Suresh Thirunavukkarasu portrait");
 
     const shareModalTitle = document.getElementById("share-modal-title");
-    const shareBrandName = document.getElementById("share-modal-brand-name");
-    const shareBrandRole = document.getElementById("share-modal-brand-role");
     const shareSubrole = document.getElementById("share-modal-subrole");
     const exchangeCardLink = document.getElementById("exchange-card-link");
     const qrNode = document.getElementById("share-modal-qr");
 
     if (shareModalTitle) {
         shareModalTitle.textContent = getPlainName();
-    }
-
-    if (shareBrandName) {
-        shareBrandName.textContent = getPlainName();
-    }
-
-    if (shareBrandRole) {
-        shareBrandRole.textContent = profileData?.profession || "Advocate";
     }
 
     if (shareSubrole) {
