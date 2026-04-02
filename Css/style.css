@@ -106,7 +106,7 @@ button {
 }
 
 .card-body {
-    padding: 0 30px 24px;
+    padding: 0 30px 0;
 }
 
 .intro-section {
@@ -277,7 +277,7 @@ button {
 
 .service-list li {
     position: relative;
-    padding-left: 16px;
+    padding-left: 20px;
     font-size: 18px;
     line-height: 24px;
     font-weight: 700;
@@ -289,8 +289,8 @@ button {
     position: absolute;
     left: 0;
     top: 9px;
-    width: 5px;
-    height: 5px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
     background: var(--accent);
 }
@@ -398,17 +398,21 @@ button {
     min-height: 90px;
     padding: 0;
     border-top: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .powered-by-group {
     display: flex;
     align-items: center;
-    gap: 14px;
     width: 100%;
-    justify-content: center;
+    min-height: 90px;
+    padding: 0 40px;
+    justify-content: space-between;
+}
+
+.powered-by-brand-group {
+    display: flex;
+    align-items: center;
+    gap: 16px;
 }
 
 .powered-by-text {
@@ -531,6 +535,14 @@ button {
     }
 
     .powered-by-group {
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding-inline: 0;
+        min-height: auto;
+    }
+
+    .powered-by-brand-group {
         gap: 10px;
         flex-wrap: wrap;
         justify-content: center;
