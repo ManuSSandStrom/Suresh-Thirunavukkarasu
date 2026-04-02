@@ -16,10 +16,12 @@
     --avatar-size: 120px;
     --avatar-top: 129px;
     --avatar-right: 30px;
-    --intro-law-icon-top: 97px;
+    --intro-law-icon-top: 94px;
     --intro-law-icon-right: 42px;
     --intro-law-icon-width: 34.99px;
     --intro-law-icon-height: 40px;
+    --intro-top-gap: 30px;
+    --intro-bottom-gap: 24px;
     --content-width: 440px;
     --side-pad: 30px;
     --intro-copy-width: 259px;
@@ -208,7 +210,7 @@ button {
 
 .intro-section {
     position: relative;
-    padding: 30px 0 26px;
+    padding: var(--intro-top-gap) 0 var(--intro-bottom-gap);
 }
 
 .intro-copy {
