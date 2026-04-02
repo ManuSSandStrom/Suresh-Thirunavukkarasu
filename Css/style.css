@@ -43,6 +43,12 @@
     --phone-text-size: 20px;
     --phone-text-line: 26px;
     --action-block-height: 90px;
+    --service-width: 346px;
+    --service-height: 216px;
+    --service-row-gap: 7px;
+    --service-indent: 18px;
+    --service-bullet-size: 6px;
+    --service-bullet-top: 9px;
     --office-width: 340px;
     --office-height: 172px;
     --office-title-width: 275px;
@@ -383,35 +389,35 @@ button {
 }
 
 .service-section {
-    min-height: 216px;
-    padding: 18px 0 18px;
+    min-height: var(--service-height);
+    padding: 16px 0 16px;
 }
 
 .service-list {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 7px;
-    width: 346px;
+    gap: var(--service-row-gap);
+    width: var(--service-width);
     margin-left: 10px;
 }
 
 .service-list li {
     position: relative;
-    padding-left: 20px;
+    padding-left: var(--service-indent);
     font-size: 18px;
     line-height: 24px;
     font-weight: 500;
-    color: #444444;
+    color: #2f2f2f;
 }
 
 .service-list li::before {
     content: "";
     position: absolute;
     left: 0;
-    top: 9px;
-    width: 6px;
-    height: 6px;
+    top: var(--service-bullet-top);
+    width: var(--service-bullet-size);
+    height: var(--service-bullet-size);
     border-radius: 50%;
     background: var(--accent);
 }
