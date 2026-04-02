@@ -558,34 +558,35 @@ button {
 .law-modal {
     position: relative;
     z-index: 1;
-    width: min(100%, 438px);
+    width: min(100%, 430px);
     background: #ffffff;
-    border-radius: 28px;
+    border-radius: 26px;
     box-shadow: 0 28px 70px rgba(0, 0, 0, 0.32);
     overflow: hidden;
 }
 
 .modal-close {
     position: absolute;
-    top: 18px;
-    right: 18px;
+    top: 14px;
+    right: 14px;
     z-index: 2;
-    width: 42px;
-    height: 42px;
+    width: 38px;
+    height: 38px;
     border-radius: 50%;
     background: rgba(19, 20, 21, 0.92);
     color: #ffffff;
-    font-size: 28px;
+    font-size: 24px;
     line-height: 1;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    border: 2px solid rgba(214, 161, 28, 0.9);
+    font-weight: 500;
 }
 
 .modal-close:focus-visible,
 .copy-url-button:focus-visible,
 .icon-asset-button:focus-visible,
-.asset-inline-button:focus-visible,
 .exchange-action:focus-visible,
 .modal-share-link:focus-visible,
 .exchange-field input:focus-visible {
@@ -595,33 +596,44 @@ button {
 
 .share-modal-hero {
     position: relative;
-    min-height: 164px;
+    min-height: 158px;
     overflow: hidden;
+}
+
+.share-modal-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0 auto 48px 0;
+    width: 68%;
+    background: linear-gradient(90deg, rgba(18, 20, 21, 0.82) 0%, rgba(18, 20, 21, 0.28) 70%, rgba(18, 20, 21, 0) 100%);
+    pointer-events: none;
 }
 
 .share-modal-banner {
     width: 100%;
-    height: 136px;
+    height: 118px;
     object-fit: cover;
 }
 
 .share-modal-brand {
     position: absolute;
-    inset: 22px auto auto 24px;
+    left: 18px;
+    top: 18px;
+    z-index: 1;
     display: flex;
     align-items: center;
     gap: 12px;
-    max-width: 230px;
+    max-width: 220px;
 }
 
 .share-modal-brand-icon {
-    width: 34px;
-    height: 40px;
-    filter: brightness(0) saturate(100%) invert(74%) sepia(31%) saturate(861%) hue-rotate(357deg) brightness(92%) contrast(84%);
+    width: 38px;
+    height: 38px;
+    object-fit: contain;
 }
 
 .share-modal-brand-name {
-    font-size: 24px;
+    font-size: 18px;
     line-height: 1.05;
     font-weight: 700;
     color: #ffffff;
@@ -629,22 +641,23 @@ button {
 
 .share-modal-brand-role {
     margin-top: 4px;
-    font-size: 16px;
-    line-height: 1.2;
+    font-size: 14px;
+    line-height: 1.15;
     font-weight: 500;
-    color: rgba(255, 255, 255, 0.88);
+    color: rgba(255, 255, 255, 0.9);
 }
 
 .share-modal-avatar-frame {
     position: absolute;
-    right: 24px;
-    top: 42px;
-    width: 116px;
-    height: 116px;
+    right: 18px;
+    top: 30px;
+    width: 102px;
+    height: 102px;
     border-radius: 50%;
     background: #ffffff;
     padding: 6px;
     box-shadow: 0 10px 26px rgba(0, 0, 0, 0.14);
+    z-index: 1;
 }
 
 .share-modal-avatar-frame img {
@@ -655,27 +668,28 @@ button {
 }
 
 .share-modal-body {
-    padding: 14px 24px 28px;
+    padding: 18px 20px 24px;
 }
 
 .share-modal-title {
-    font-size: 30px;
-    line-height: 1.08;
+    max-width: 290px;
+    font-size: 22px;
+    line-height: 1.14;
     font-weight: 700;
     color: #1f1a16;
 }
 
 .share-modal-subrole {
-    margin-top: 8px;
-    font-size: 18px;
+    margin-top: 6px;
+    font-size: 15px;
     line-height: 1.25;
     font-weight: 600;
     color: var(--accent);
 }
 
 .share-modal-qr-shell {
-    margin-top: 22px;
-    padding: 22px;
+    margin-top: 18px;
+    padding: 18px 0 16px;
     border-top: 1px solid var(--divider);
     border-bottom: 1px solid var(--divider);
     display: flex;
@@ -683,24 +697,25 @@ button {
 }
 
 .share-modal-qr {
-    width: min(100%, 280px);
+    width: min(100%, 276px);
     aspect-ratio: 1;
     object-fit: contain;
     background: #ffffff;
 }
 
 .share-modal-tool-row {
-    margin-top: 22px;
-    display: flex;
+    margin-top: 18px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 54px;
     align-items: center;
     gap: 12px;
 }
 
 .copy-url-button {
-    flex: 1 1 auto;
-    min-height: 60px;
-    padding: 8px 16px;
-    border-radius: 18px;
+    width: 100%;
+    min-height: 54px;
+    padding: 8px 14px;
+    border-radius: 999px;
     background: #f4f1ea;
     display: inline-flex;
     align-items: center;
@@ -719,31 +734,23 @@ button {
 }
 
 .icon-asset-button {
-    width: 44px;
-    height: 44px;
-    flex: 0 0 44px;
+    width: 52px;
+    height: 52px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #131415;
 }
 
-.icon-asset-button img,
-.asset-inline-button img {
+.icon-asset-button img {
     width: 100%;
     height: auto;
 }
 
-.share-modal-secondary-row {
-    margin-top: 14px;
-    display: flex;
-    justify-content: center;
-}
-
-.asset-inline-button {
-    width: 178.2px;
-    max-width: 100%;
-}
-
 .share-modal-share-row {
-    margin-top: 22px;
-    padding-top: 18px;
+    margin-top: 20px;
+    padding-top: 16px;
     border-top: 1px solid var(--divider);
     display: flex;
     align-items: center;
@@ -765,19 +772,19 @@ button {
 }
 
 .modal-share-link {
-    width: 42px;
-    height: 42px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     background: #ffffff;
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
 }
 
 .modal-share-link img {
-    width: 22px;
-    height: 22px;
+    width: 21px;
+    height: 21px;
     object-fit: contain;
 }
 
@@ -913,26 +920,30 @@ button {
     }
 
     .share-modal-avatar-frame {
-        width: 96px;
-        height: 96px;
-        right: 18px;
+        width: 92px;
+        height: 92px;
+        right: 16px;
+        top: 30px;
     }
 
     .share-modal-brand {
-        left: 18px;
-        right: 112px;
-        max-width: none;
+        left: 16px;
+        top: 16px;
+        max-width: 200px;
+    }
+
+    .share-modal-brand-name {
+        font-size: 16px;
     }
 
     .share-modal-title {
-        font-size: 26px;
+        font-size: 22px;
     }
 }
 
 @media (max-width: 430px) {
     .page-shell {
-        padding-top: 0;
-        padding-inline: 0;
+        padding: 10px 8px 20px;
     }
 
     .profile-card {
@@ -941,6 +952,12 @@ button {
 
     .card-body {
         padding-inline: 16px;
+    }
+
+    .intro-copy {
+        width: calc(100% - 126px);
+        max-width: calc(100% - 126px);
+        margin-left: 0;
     }
 
     .avatar-frame {
@@ -977,19 +994,22 @@ button {
     }
 
     .top-socials {
+        width: 100%;
         align-self: start;
         justify-content: flex-end;
     }
 
     .action-row {
-        flex-wrap: wrap;
+        width: 100%;
+        flex-wrap: nowrap;
+        gap: 6px;
     }
 
-    .icon-tile-link,
     .exchange-button,
     .save-button {
-        width: 100%;
-        flex: 1 1 100%;
+        width: auto;
+        flex: 1 1 0;
+        min-width: 0;
     }
 
     .map-link,
@@ -1016,27 +1036,19 @@ button {
     }
 
     .share-modal-body {
-        padding: 8px 18px 22px;
+        padding: 16px 18px 22px;
     }
 
     .share-modal-hero {
-        min-height: 132px;
+        min-height: 126px;
     }
 
     .share-modal-banner {
-        height: 112px;
-    }
-
-    .share-modal-brand-name {
-        font-size: 18px;
-    }
-
-    .share-modal-brand-role {
-        font-size: 13px;
+        height: 96px;
     }
 
     .share-modal-tool-row {
-        align-items: stretch;
+        grid-template-columns: minmax(0, 1fr) 48px;
     }
 
     .copy-url-button {
@@ -1049,6 +1061,11 @@ button {
         width: 38px;
         height: 38px;
         flex-basis: 38px;
+    }
+
+    .icon-asset-button {
+        width: 48px;
+        height: 48px;
     }
 
     .share-modal-share-row {

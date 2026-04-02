@@ -406,18 +406,6 @@ function bindActionButtons() {
         });
     }
 
-    const shareAddContactButton = document.getElementById("share-add-contact-button");
-    if (shareAddContactButton) {
-        shareAddContactButton.addEventListener("click", async () => {
-            try {
-                await saveContactCard();
-            } catch (error) {
-                console.error(error);
-                setStatus("share-modal-status", "Unable to download contact file.");
-            }
-        });
-    }
-
     const exchangeForm = document.getElementById("exchange-form");
     if (exchangeForm) {
         exchangeForm.addEventListener("submit", submitExchangeForm);
