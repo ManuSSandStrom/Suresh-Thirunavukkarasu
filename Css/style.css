@@ -15,10 +15,15 @@
     --avatar-size: 120px;
     --avatar-top: 129px;
     --avatar-right: 30px;
+    --intro-law-icon-top: 97px;
+    --intro-law-icon-right: 42px;
+    --intro-law-icon-width: 34.99px;
+    --intro-law-icon-height: 40px;
     --content-width: 440px;
     --side-pad: 30px;
     --intro-copy-width: 259px;
     --intro-copy-offset: 10px;
+    --intro-degree-gap: 6px;
     --role-block-height: 70px;
     --summary-width: 412px;
     --summary-height: 72px;
@@ -195,7 +200,7 @@ button {
 }
 
 .profile-degree {
-    margin-top: 8px;
+    margin-top: var(--intro-degree-gap);
     font-size: 18px;
     line-height: 24px;
     font-weight: 500;
@@ -205,10 +210,10 @@ button {
 
 .intro-law-icon {
     position: absolute;
-    right: 42px;
-    top: 82px;
-    width: 34px;
-    height: 40px;
+    right: var(--intro-law-icon-right);
+    top: var(--intro-law-icon-top);
+    width: var(--intro-law-icon-width);
+    height: var(--intro-law-icon-height);
 }
 
 .content-section {
