@@ -26,6 +26,13 @@
     --intro-copy-offset: 10px;
     --intro-degree-gap: 6px;
     --role-block-height: 70px;
+    --role-top-gap: 19px;
+    --role-bottom-gap: 19px;
+    --role-row-width: 328px;
+    --role-title-size: 24px;
+    --role-title-line: 32px;
+    --role-tag-size: 18px;
+    --role-tag-line: 24px;
     --summary-width: 412px;
     --summary-height: 72px;
     --contact-block-height: 139px;
@@ -230,34 +237,36 @@ button {
 }
 
 .role-section {
-    padding: 20px 0 18px;
+    padding: var(--role-top-gap) 10px var(--role-bottom-gap) 10px;
 }
 
 .role-row {
     display: flex;
-    align-items: baseline;
+    align-items: center;
     justify-content: space-between;
     gap: 12px;
+    width: var(--role-row-width);
+    max-width: 100%;
     min-height: var(--role-block-height);
 }
 
 .role-title {
-    font-size: 18px;
-    line-height: 24px;
+    font-size: var(--role-title-size);
+    line-height: var(--role-title-line);
     font-weight: 700;
-    color: #272727;
+    color: #171717;
 }
 
 .practice-tag {
-    font-size: 18px;
-    line-height: 24px;
+    font-size: var(--role-tag-size);
+    line-height: var(--role-tag-line);
     font-weight: 700;
     color: var(--accent);
     letter-spacing: 0;
 }
 
 .profile-summary {
-    margin-top: 6px;
+    margin-top: var(--role-bottom-gap);
     width: var(--summary-width);
     max-width: 100%;
     min-height: var(--summary-height);
