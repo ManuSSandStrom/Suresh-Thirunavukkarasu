@@ -15,21 +15,42 @@ function resolveAssetPath(path) {
 }
 
 async function loadData() {
-    try {
-        const response = await fetch("./data.json", { cache: "no-store" });
-        if (!response.ok) {
-            throw new Error("Unable to load data.json");
-        }
-        profileData = await response.json();
-    } catch (error) {
-        const fallbackNode = document.getElementById("profile-data-fallback");
+    const fallbackNode = document.getElementById("profile-data-fallback");
+
+    if (window.location.protocol === "file:" || !window.fetch) {
         if (!fallbackNode) {
-            throw error;
+            throw new Error("Embedded profile data not available");
         }
         profileData = JSON.parse(fallbackNode.textContent);
+    } else {
+        try {
+            const response = await fetch("./data.json", { cache: "no-store" });
+            if (!response.ok) {
+                throw new Error("Unable to load data.json");
+            }
+            profileData = await response.json();
+        } catch (error) {
+            if (!fallbackNode) {
+                throw error;
+            }
+            profileData = JSON.parse(fallbackNode.textContent);
+        }
     }
 
     assetBasePath = profileData.assetBasePath || "./Assets";
+}
+
+function isPublicHttpUrl(value) {
+    if (!value) {
+        return false;
+    }
+
+    try {
+        const parsed = new URL(value, window.location.href);
+        return parsed.protocol === "http:" || parsed.protocol === "https:";
+    } catch (error) {
+        return false;
+    }
 }
 
 function createContactItem(iconPath, label, href) {
@@ -146,7 +167,13 @@ function triggerDownload(href, filename) {
 }
 
 function getCardUrl() {
-    return profileData?.website?.href || profileData?.shareHref || window.location.href;
+    const candidates = [
+        profileData?.website?.href,
+        profileData?.shareHref,
+        window.location.protocol === "file:" ? "" : window.location.href
+    ];
+
+    return candidates.find((candidate) => isPublicHttpUrl(candidate)) || "";
 }
 
 function getPlainName() {
@@ -154,7 +181,10 @@ function getPlainName() {
 }
 
 function getQrCodeUrl() {
-    return `https://api.qrserver.com/v1/create-qr-code/?size=320x320&margin=0&data=${encodeURIComponent(getCardUrl())}`;
+    const shareUrl = getCardUrl();
+    return shareUrl
+        ? `https://api.qrserver.com/v1/create-qr-code/?size=320x320&margin=0&data=${encodeURIComponent(shareUrl)}`
+        : "";
 }
 
 function openModal(layerId) {
@@ -206,6 +236,10 @@ function bindModalDismissals() {
 async function copyCardUrl() {
     const shareUrl = getCardUrl();
 
+    if (!shareUrl) {
+        throw new Error("Public card URL not available");
+    }
+
     if (navigator.clipboard?.writeText) {
         await navigator.clipboard.writeText(shareUrl);
         setStatus("share-modal-status", "Digital card URL copied.");
@@ -234,7 +268,7 @@ function buildShareLinks() {
     const shareUrl = getCardUrl();
     const shareTitle = profileData?.pageTitle || "Digital Card";
     const shareText = `${getPlainName()} ${shareUrl}`;
-    const links = [
+    const links = shareUrl ? [
         {
             icon: "whatsapp_icon.svg",
             label: "Share via WhatsApp",
@@ -255,7 +289,7 @@ function buildShareLinks() {
             label: "Open digital card",
             href: shareUrl
         }
-    ];
+    ] : [];
 
     container.innerHTML = "";
 
@@ -298,7 +332,12 @@ function populateModals() {
     }
 
     if (qrNode) {
-        qrNode.src = getQrCodeUrl();
+        const qrCodeUrl = getQrCodeUrl();
+        if (qrCodeUrl) {
+            qrNode.src = qrCodeUrl;
+        } else {
+            qrNode.removeAttribute("src");
+        }
     }
 
     buildShareLinks();
