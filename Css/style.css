@@ -49,6 +49,7 @@
     --website-color: #202020;
     --website-width: 232px;
     --footer-row-height: 90px;
+    --footer-inline-pad: 10px;
 }
 
 * {
@@ -291,7 +292,8 @@ button {
     display: flex;
     align-items: center;
     gap: 12px;
-    align-self: center;
+    align-self: start;
+    margin-top: 3px;
 }
 
 .social-icon-link {
@@ -369,7 +371,7 @@ button {
     padding-left: 20px;
     font-size: 18px;
     line-height: 24px;
-    font-weight: 700;
+    font-weight: 500;
     color: #444444;
 }
 
@@ -492,7 +494,7 @@ button {
 .footer-section {
     min-height: var(--footer-row-height);
     padding: 0;
-    border-top: 0;
+    border-top: 1px solid var(--divider);
 }
 
 .powered-by-group {
@@ -500,7 +502,7 @@ button {
     align-items: center;
     width: 100%;
     min-height: var(--footer-row-height);
-    padding: 0 40px;
+    padding: 0 var(--footer-inline-pad);
     justify-content: space-between;
 }
 
