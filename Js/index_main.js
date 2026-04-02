@@ -213,6 +213,49 @@ function getPlainName() {
     return `${profileData?.officeName || ""}`.replace(/\s+/g, " ").trim() || "Suresh Thirunavukkarasu";
 }
 
+function getDigits(value) {
+    return `${value || ""}`.replace(/\D+/g, "");
+}
+
+function getFirstWhatsappHref() {
+    const whatsappSocial = (profileData?.topSocials || []).find((item) => {
+        const label = `${item?.label || ""}`.toLowerCase();
+        const href = `${item?.href || ""}`.toLowerCase();
+        return label.includes("whatsapp") || href.includes("wa.me");
+    });
+
+    return whatsappSocial?.href || "";
+}
+
+function getExchangeContactHref() {
+    const candidates = [
+        profileData?.exchangeContactHref,
+        getFirstWhatsappHref(),
+        profileData?.officePhone?.href,
+        profileData?.phones?.[0]?.href,
+        profileData?.officeEmail?.href,
+        profileData?.email?.href
+    ];
+
+    return candidates.find((candidate) => `${candidate || ""}`.trim()) || "";
+}
+
+function buildExchangeMessage({ name, mobile, email, company, digitalCard }) {
+    return [
+        "Hello,",
+        "",
+        "Sharing my contact details with you:",
+        "",
+        `Name: ${name}`,
+        `Mobile: ${mobile}`,
+        `Email: ${email}`,
+        `Company Name: ${company || "-"}`,
+        `Digital Card: ${digitalCard || "-"}`,
+        "",
+        "Please share your contact card as well."
+    ].join("\n");
+}
+
 function getQrCodeUrl() {
     const shareUrl = getCardUrl();
     return shareUrl
@@ -317,7 +360,7 @@ async function saveContactCard() {
         throw new Error("Contact file not available");
     }
 
-    triggerDownload(resolveAssetPath(profileData.vcardFile), "Suresh-Thirunavukkarasu.vcf");
+    triggerDownload(resolveAssetPath(profileData.vcardFile), `${getPlainName().replace(/\s+/g, "-")}.vcf`);
     setStatus("action-status", "Contact file downloaded.");
     setStatus("share-modal-status", "Contact file downloaded.");
 }
@@ -421,24 +464,30 @@ function submitExchangeForm(event) {
     const company = `${formData.get("company") || ""}`.trim();
     const digitalCard = `${formData.get("digital_card") || ""}`.trim() || getCardUrl();
 
-    const targetEmail = profileData?.email?.label || profileData?.officeEmail?.label || "";
-    const subject = `Exchange Contact - ${name}`;
-    const body = [
-        "Hello,",
-        "",
-        "Sharing my contact details with you:",
-        "",
-        `Name: ${name}`,
-        `Mobile: ${mobile}`,
-        `Email: ${email}`,
-        `Company Name: ${company || "-"}`,
-        `Digital Card: ${digitalCard}`,
-        "",
-        "Please share your contact card as well."
-    ].join("\n");
+    const targetHref = getExchangeContactHref();
+    const message = buildExchangeMessage({ name, mobile, email, company, digitalCard });
 
-    window.location.href = `mailto:${targetEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    setStatus("exchange-modal-status", "Opening your email app...");
+    if (!targetHref) {
+        setStatus("exchange-modal-status", "Exchange contact destination not available.");
+        return;
+    }
+
+    if (targetHref.startsWith("mailto:")) {
+        const emailAddress = targetHref.replace(/^mailto:/i, "").split("?")[0];
+        const subject = `Exchange Contact - ${name}`;
+        window.location.href = `mailto:${emailAddress}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
+        setStatus("exchange-modal-status", "Opening your email app...");
+    } else {
+        const whatsappNumber = getDigits(targetHref);
+        if (!whatsappNumber) {
+            setStatus("exchange-modal-status", "WhatsApp number not available.");
+            return;
+        }
+
+        window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, "_blank", "noopener");
+        setStatus("exchange-modal-status", "Opening WhatsApp...");
+    }
+
     closeModal("exchange-modal-layer");
     form.reset();
 
