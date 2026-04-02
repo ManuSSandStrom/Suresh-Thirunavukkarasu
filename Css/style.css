@@ -37,6 +37,9 @@
     --summary-width: 412px;
     --summary-height: 72px;
     --contact-block-height: 139px;
+    --contact-top-gap: 21px;
+    --contact-bottom-gap: 24px;
+    --contact-row-gap: 8px;
     --phone-text-size: 20px;
     --phone-text-line: 26px;
     --action-block-height: 90px;
@@ -282,13 +285,13 @@ button {
     grid-template-columns: 1fr auto;
     gap: 16px;
     min-height: var(--contact-block-height);
-    padding: 18px 0 18px;
+    padding: var(--contact-top-gap) 0 var(--contact-bottom-gap);
 }
 
 .contact-list {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: var(--contact-row-gap);
 }
 
 .contact-item {
@@ -317,7 +320,7 @@ button {
     align-items: center;
     gap: 12px;
     align-self: start;
-    margin-top: 2px;
+    margin-top: 1px;
 }
 
 .social-icon-link {
@@ -327,15 +330,18 @@ button {
 
 .action-section {
     min-height: var(--action-block-height);
-    padding: 22px 0;
+    padding: 23px 0;
     display: flex;
     align-items: center;
 }
 
 .action-row {
+    width: 440px;
+    max-width: 100%;
     display: flex;
     align-items: center;
-    gap: 8px;
+    justify-content: space-between;
+    gap: 0;
 }
 
 .asset-button {
@@ -346,7 +352,7 @@ button {
 .icon-tile-link {
     width: 44px;
     height: 44px;
-    flex: 0 0 44px;
+    flex: 0 0 auto;
 }
 
 .asset-button:focus-visible,
@@ -368,12 +374,12 @@ button {
 
 .exchange-button {
     width: 189.2px;
-    flex: 0 0 189.2px;
+    flex: 0 0 auto;
 }
 
 .save-button {
     width: 179.07px;
-    flex: 0 0 179.07px;
+    flex: 0 0 auto;
 }
 
 .service-section {
