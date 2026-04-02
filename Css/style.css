@@ -503,6 +503,8 @@ button {
     min-height: var(--footer-row-height);
     padding: 0;
     border-top: 1px solid var(--divider);
+    display: flex;
+    align-items: center;
 }
 
 .powered-by-group {
@@ -965,11 +967,22 @@ button {
         justify-content: flex-end;
     }
 
+    .action-section {
+        padding: 18px 0;
+    }
+
     .action-row {
         width: 100%;
         display: grid;
-        grid-template-columns: 44px minmax(0, 1fr) minmax(0, 1fr);
-        gap: 8px;
+        grid-template-columns: 42px minmax(0, 1fr) minmax(0, 1fr);
+        gap: 6px;
+        align-items: center;
+    }
+
+    .icon-tile-link {
+        width: 42px;
+        height: 42px;
+        flex: 0 0 42px;
     }
 
     .exchange-button,
@@ -1007,11 +1020,14 @@ button {
         flex-wrap: nowrap;
         justify-content: space-between;
         padding-inline: 0;
+        min-height: var(--footer-row-height);
+        align-items: center;
     }
 
     .powered-by-brand-group {
         gap: 10px;
         flex-wrap: nowrap;
+        align-items: center;
         justify-content: flex-end;
     }
 
