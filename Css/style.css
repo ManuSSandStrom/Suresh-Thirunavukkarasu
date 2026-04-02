@@ -8,6 +8,22 @@
     --accent: #d19a1f;
     --divider: #ececec;
     --shadow: 0 18px 48px rgba(0, 0, 0, 0.22);
+    --card-width: 500px;
+    --hero-height: 180px;
+    --avatar-size: 120px;
+    --avatar-top: 129px;
+    --avatar-right: 30px;
+    --content-width: 440px;
+    --side-pad: 30px;
+    --intro-copy-width: 259px;
+    --intro-copy-offset: 10px;
+    --role-block-height: 70px;
+    --summary-width: 412px;
+    --summary-height: 72px;
+    --contact-block-height: 139px;
+    --phone-text-size: 20px;
+    --phone-text-line: 26px;
+    --action-block-height: 90px;
 }
 
 * {
@@ -82,7 +98,7 @@ button {
 }
 
 .profile-card {
-    width: min(100%, 500px);
+    width: min(100%, var(--card-width));
     background: var(--card-bg);
     border-radius: 20px;
     overflow: hidden;
@@ -92,7 +108,7 @@ button {
 
 .hero-section {
     position: relative;
-    height: 180px;
+    height: var(--hero-height);
     overflow: visible;
 }
 
@@ -104,10 +120,10 @@ button {
 
 .avatar-frame {
     position: absolute;
-    top: 129px;
-    right: 30px;
-    width: 120px;
-    height: 120px;
+    top: var(--avatar-top);
+    right: var(--avatar-right);
+    width: var(--avatar-size);
+    height: var(--avatar-size);
     border-radius: 50%;
     background: #ffffff;
     padding: 6px;
@@ -122,7 +138,7 @@ button {
 }
 
 .card-body {
-    padding: 0 30px 0;
+    padding: 0 var(--side-pad) 0;
 }
 
 .intro-section {
@@ -131,7 +147,9 @@ button {
 }
 
 .intro-copy {
-    max-width: 245px;
+    width: var(--intro-copy-width);
+    max-width: 100%;
+    margin-left: var(--intro-copy-offset);
 }
 
 .profile-name {
@@ -164,7 +182,7 @@ button {
 }
 
 .role-section {
-    padding: 18px 0 16px;
+    padding: 20px 0 18px;
 }
 
 .role-row {
@@ -172,6 +190,7 @@ button {
     align-items: baseline;
     justify-content: space-between;
     gap: 12px;
+    min-height: var(--role-block-height);
 }
 
 .role-title {
@@ -190,8 +209,10 @@ button {
 }
 
 .profile-summary {
-    margin-top: 12px;
-    max-width: 412px;
+    margin-top: 6px;
+    width: var(--summary-width);
+    max-width: 100%;
+    min-height: var(--summary-height);
     font-size: 18px;
     line-height: 24px;
     font-weight: 400;
@@ -202,7 +223,8 @@ button {
     display: grid;
     grid-template-columns: 1fr auto;
     gap: 16px;
-    padding: 16px 0 18px;
+    min-height: var(--contact-block-height);
+    padding: 20px 0 18px;
 }
 
 .contact-list {
@@ -216,7 +238,7 @@ button {
     align-items: center;
     gap: 10px;
     color: var(--text-link);
-    min-height: 34px;
+    min-height: 26px;
 }
 
 .contact-icon {
@@ -227,9 +249,9 @@ button {
 }
 
 .contact-text {
-    font-size: 18px;
-    line-height: 34px;
-    font-weight: 700;
+    font-size: var(--phone-text-size);
+    line-height: var(--phone-text-line);
+    font-weight: 500;
 }
 
 .top-socials {
@@ -245,7 +267,7 @@ button {
 }
 
 .action-section {
-    min-height: 90px;
+    min-height: var(--action-block-height);
     padding: 22px 0;
     display: flex;
     align-items: center;
