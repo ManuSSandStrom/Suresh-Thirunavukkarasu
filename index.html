@@ -130,16 +130,17 @@
 
                 <section class="content-section action-section">
                     <div class="action-row">
-                        <a class="icon-tile-link" id="share-link" href="https://www.lawmines.com/" target="_blank" rel="noreferrer">
+                        <button class="icon-tile-link" id="share-link" type="button" aria-label="Share profile">
                             <img src="./Assets/Share_icon.svg" alt="Share profile">
-                        </a>
-                        <a class="asset-button exchange-button" id="exchange-contact-link" href="mailto:suresh.thirumalar@gmail.com?subject=Exchange%20Contact">
+                        </button>
+                        <button class="asset-button exchange-button" id="exchange-contact-link" type="button" aria-label="Exchange contact">
                             <img src="./Assets/ExchangeContact.svg" alt="Exchange contact">
-                        </a>
-                        <a class="asset-button save-button" id="save-contact-link" href="./Assets/Profile/+918825498580.vcf" download>
+                        </button>
+                        <button class="asset-button save-button" id="save-contact-link" type="button" aria-label="Save to contacts">
                             <img src="./Assets/SavetoContacts.svg" alt="Save to contacts">
-                        </a>
+                        </button>
                     </div>
+                    <p class="visually-hidden" id="action-status" aria-live="polite"></p>
                 </section>
 
                 <section class="content-section service-section">

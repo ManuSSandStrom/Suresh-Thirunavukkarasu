@@ -1,5 +1,6 @@
 let profileData = null;
 let assetBasePath = "./Assets";
+let actionStatusTimeout = null;
 
 function resolveAssetPath(path) {
     if (!path) {
@@ -118,6 +119,163 @@ function setLink(id, href, text) {
     }
 }
 
+function setActionStatus(message) {
+    const statusNode = document.getElementById("action-status");
+    if (!statusNode) {
+        return;
+    }
+
+    statusNode.textContent = "";
+
+    if (actionStatusTimeout) {
+        clearTimeout(actionStatusTimeout);
+    }
+
+    actionStatusTimeout = window.setTimeout(() => {
+        statusNode.textContent = message;
+    }, 20);
+}
+
+async function fetchContactFile() {
+    if (!profileData?.vcardFile) {
+        return null;
+    }
+
+    const fileUrl = resolveAssetPath(profileData.vcardFile);
+    const response = await fetch(fileUrl);
+    if (!response.ok) {
+        throw new Error("Unable to load contact file");
+    }
+
+    const blob = await response.blob();
+    return new File([blob], "Suresh-Thirunavukkarasu.vcf", {
+        type: blob.type || "text/vcard"
+    });
+}
+
+function triggerDownload(href, filename) {
+    const link = document.createElement("a");
+    link.href = href;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+}
+
+function downloadBlob(blob, filename) {
+    const blobUrl = URL.createObjectURL(blob);
+    triggerDownload(blobUrl, filename);
+    window.setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
+}
+
+async function saveContactCard() {
+    if (!profileData?.vcardFile) {
+        throw new Error("Contact file not available");
+    }
+
+    triggerDownload(resolveAssetPath(profileData.vcardFile), "Suresh-Thirunavukkarasu.vcf");
+    setActionStatus("Contact file downloaded.");
+}
+
+async function shareProfileCard() {
+    const shareUrl = profileData?.website?.href || profileData?.shareHref || window.location.href;
+    const shareData = {
+        title: profileData?.pageTitle || "Profile Card",
+        text: `${profileData?.officeName || profileData?.profession || "Profile"}${profileData?.officePhone?.label ? ` • ${profileData.officePhone.label}` : ""}`,
+        url: shareUrl
+    };
+
+    if (navigator.share) {
+        await navigator.share(shareData);
+        return;
+    }
+
+    if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(shareUrl);
+        setActionStatus("Profile link copied.");
+        return;
+    }
+
+    window.open(shareUrl, "_blank", "noopener,noreferrer");
+}
+
+async function exchangeContactCard() {
+    const fallbackHref = profileData?.exchangeContactHref || profileData?.email?.href || profileData?.website?.href;
+    const shareUrl = profileData?.website?.href || window.location.href;
+    const shareText = `${profileData?.officeName || "Profile"}${profileData?.officePhone?.label ? ` • ${profileData.officePhone.label}` : ""}`;
+
+    if (navigator.share) {
+        try {
+            const contactFile = await fetchContactFile();
+            if (contactFile && navigator.canShare?.({ files: [contactFile] })) {
+                await navigator.share({
+                    title: profileData?.pageTitle || "Contact Card",
+                    text: shareText,
+                    files: [contactFile],
+                    url: shareUrl
+                });
+                return;
+            }
+
+            await navigator.share({
+                title: profileData?.pageTitle || "Contact Card",
+                text: shareText,
+                url: shareUrl
+            });
+            return;
+        } catch (error) {
+            if (error?.name === "AbortError") {
+                return;
+            }
+        }
+    }
+
+    if (fallbackHref) {
+        window.location.href = fallbackHref;
+        return;
+    }
+
+    await saveContactCard();
+}
+
+function bindActionButtons() {
+    const shareButton = document.getElementById("share-link");
+    if (shareButton) {
+        shareButton.addEventListener("click", async () => {
+            try {
+                await shareProfileCard();
+            } catch (error) {
+                console.error(error);
+                setActionStatus("Unable to share profile right now.");
+            }
+        });
+    }
+
+    const exchangeButton = document.getElementById("exchange-contact-link");
+    if (exchangeButton) {
+        exchangeButton.addEventListener("click", async () => {
+            try {
+                await exchangeContactCard();
+            } catch (error) {
+                console.error(error);
+                setActionStatus("Unable to exchange contact right now.");
+            }
+        });
+    }
+
+    const saveButton = document.getElementById("save-contact-link");
+    if (saveButton) {
+        saveButton.addEventListener("click", async () => {
+            try {
+                await saveContactCard();
+            } catch (error) {
+                console.error(error);
+                setActionStatus("Unable to download contact file.");
+            }
+        });
+    }
+}
+
 function populateCard() {
     const data = profileData;
 
@@ -182,15 +340,6 @@ function populateCard() {
     populateLinks("bottom-socials", data.bottomSocials, "bottom-social-link");
     populateServices(data.services);
 
-    setLink("share-link", data.shareHref);
-    setLink("exchange-contact-link", data.exchangeContactHref);
-
-    const saveContactLink = document.getElementById("save-contact-link");
-    if (saveContactLink && data.vcardFile) {
-        saveContactLink.href = resolveAssetPath(data.vcardFile);
-        saveContactLink.download = "Suresh-Thirunavukkarasu.vcf";
-    }
-
     const officeNameNode = document.getElementById("office-name-text");
     if (officeNameNode) {
         officeNameNode.textContent = data.officeName || "";
@@ -218,6 +367,7 @@ function populateCard() {
 async function main() {
     await loadData();
     populateCard();
+    bindActionButtons();
 }
 
 main().catch((error) => {
