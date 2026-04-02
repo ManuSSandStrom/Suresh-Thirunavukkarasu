@@ -42,6 +42,7 @@
     --contact-top-gap: 21px;
     --contact-bottom-gap: 24px;
     --contact-row-gap: 8px;
+    --top-socials-width: 72px;
     --phone-text-size: 20px;
     --phone-text-line: 26px;
     --action-block-height: 90px;
@@ -292,6 +293,9 @@ button {
     display: grid;
     grid-template-columns: 1fr auto;
     gap: 16px;
+    width: var(--content-width);
+    max-width: 100%;
+    margin-inline: auto;
     min-height: var(--contact-block-height);
     padding: var(--contact-top-gap) 0 var(--contact-bottom-gap);
 }
@@ -325,8 +329,10 @@ button {
 
 .top-socials {
     display: flex;
+    width: var(--top-socials-width);
     align-items: center;
-    gap: 12px;
+    justify-content: space-between;
+    gap: 0;
     align-self: start;
     margin-top: 1px;
 }
@@ -346,6 +352,7 @@ button {
 .action-row {
     width: 440px;
     max-width: 100%;
+    margin-inline: auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -483,6 +490,9 @@ button {
 }
 
 .bottom-social-section {
+    width: var(--content-width);
+    max-width: 100%;
+    margin-inline: auto;
     min-height: var(--social-row-height);
     padding: 0;
     display: flex;
@@ -516,6 +526,9 @@ button {
 }
 
 .website-section {
+    width: var(--content-width);
+    max-width: 100%;
+    margin-inline: auto;
     min-height: var(--website-row-height);
     padding: 0;
     display: flex;
@@ -543,7 +556,9 @@ button {
 .powered-by-group {
     display: flex;
     align-items: center;
-    width: 100%;
+    width: var(--content-width);
+    max-width: 100%;
+    margin-inline: auto;
     min-height: var(--footer-row-height);
     padding: 0 var(--footer-inline-pad);
     justify-content: space-between;
