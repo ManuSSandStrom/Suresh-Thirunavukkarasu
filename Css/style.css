@@ -12,6 +12,7 @@
     --hero-radius: 20px;
     --hero-height: 180px;
     --hero-banner-position: 50% 0%;
+    --hero-banner-scale: 1.115;
     --avatar-size: 120px;
     --avatar-top: 129px;
     --avatar-right: 30px;
@@ -158,6 +159,8 @@ button {
     height: 100%;
     object-fit: cover;
     object-position: var(--hero-banner-position);
+    transform: scale(var(--hero-banner-scale));
+    transform-origin: left top;
 }
 
 .avatar-frame {
@@ -166,17 +169,12 @@ button {
     right: var(--avatar-right);
     width: var(--avatar-size);
     height: var(--avatar-size);
-    border-radius: 50%;
-    background: #ffffff;
-    padding: 6px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
     z-index: 2;
 }
 
 .avatar-frame img {
     width: 100%;
     height: 100%;
-    border-radius: 50%;
     object-fit: cover;
 }
 
@@ -910,7 +908,7 @@ button {
 
 @media (max-width: 430px) {
     .page-shell {
-        padding: 10px 8px 20px;
+        padding: 12px 10px 20px;
     }
 
     .profile-card {
@@ -918,65 +916,85 @@ button {
     }
 
     .card-body {
-        padding-inline: 16px;
+        padding-inline: 18px;
+    }
+
+    .intro-section {
+        padding: 26px 0 22px;
     }
 
     .intro-copy {
-        width: calc(100% - 126px);
-        max-width: calc(100% - 126px);
+        width: calc(100% - 118px);
+        max-width: calc(100% - 118px);
         margin-left: 0;
     }
 
     .avatar-frame {
-        top: 126px;
-        right: 20px;
-        width: 104px;
-        height: 104px;
+        top: 132px;
+        right: 18px;
+        width: 96px;
+        height: 96px;
     }
 
     .intro-law-icon {
-        right: 30px;
-        top: 86px;
-        width: 30px;
-        height: 35px;
+        right: 22px;
+        top: 92px;
+        width: 28px;
+        height: 32px;
     }
 
     .profile-name {
-        font-size: 24px;
-        line-height: 30px;
+        font-size: 26px;
+        line-height: 32px;
     }
 
     .profile-degree,
-    .role-title,
-    .practice-tag,
     .profile-summary,
-    .contact-text,
-    .service-list li {
+    .contact-text {
         font-size: 16px;
         line-height: 22px;
     }
 
     .contact-section {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 12px;
     }
 
     .top-socials {
-        width: 100%;
         align-self: start;
         justify-content: flex-end;
     }
 
     .action-row {
         width: 100%;
-        flex-wrap: nowrap;
-        gap: 6px;
+        display: grid;
+        grid-template-columns: 44px minmax(0, 1fr) minmax(0, 1fr);
+        gap: 8px;
     }
 
     .exchange-button,
     .save-button {
-        width: auto;
-        flex: 1 1 0;
+        width: 100%;
         min-width: 0;
+    }
+
+    .service-list {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .service-list li {
+        font-size: 17px;
+        line-height: 23px;
+    }
+
+    .download-profile-button {
+        width: 100%;
+    }
+
+    .office-section > * {
+        width: 100%;
+        margin-left: 0;
     }
 
     .map-link,
@@ -985,17 +1003,28 @@ button {
     }
 
     .powered-by-group {
-        gap: 10px;
-        flex-wrap: wrap;
-        justify-content: center;
+        gap: 12px;
+        flex-wrap: nowrap;
+        justify-content: space-between;
         padding-inline: 0;
-        min-height: auto;
     }
 
     .powered-by-brand-group {
         gap: 10px;
-        flex-wrap: wrap;
-        justify-content: center;
+        flex-wrap: nowrap;
+        justify-content: flex-end;
+    }
+
+    .powered-by-text {
+        width: 68px;
+    }
+
+    .powered-by-lawmines {
+        width: 96px;
+    }
+
+    .powered-by-good {
+        width: 90px;
     }
 
     .modal-layer {
