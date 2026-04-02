@@ -1033,6 +1033,47 @@ button {
     .share-modal-title {
         font-size: 22px;
     }
+
+    .exchange-modal {
+        width: min(calc(100vw - 28px), 362px);
+        max-height: calc(100dvh - 32px);
+        padding: 18px 16px 16px;
+        border-radius: 22px;
+    }
+
+    .exchange-modal-head {
+        padding: 0 40px 0;
+    }
+
+    .exchange-modal-title {
+        max-width: none;
+        font-size: 18px;
+        line-height: 1.15;
+    }
+
+    .exchange-form {
+        margin-top: 12px;
+    }
+
+    .exchange-field + .exchange-field {
+        margin-top: 10px;
+    }
+
+    .exchange-field input {
+        height: 50px;
+        padding: 0 15px;
+        font-size: 15px;
+    }
+
+    .exchange-actions {
+        margin-top: 14px;
+        gap: 8px;
+    }
+
+    .exchange-action {
+        min-height: 46px;
+        font-size: 15px;
+    }
 }
 
 @media (max-width: 430px) {
@@ -1282,47 +1323,47 @@ button {
     }
 
     .exchange-modal {
-        width: min(calc(100vw - 24px), 410px);
+        width: min(calc(100vw - 24px), 350px);
         max-height: calc(100dvh - 28px);
-        padding: 20px 18px 18px;
-        border-radius: 24px;
+        padding: 16px 14px 14px;
+        border-radius: 20px;
     }
 
     .exchange-modal-head {
-        padding: 0 46px 0;
+        padding: 0 38px 0;
     }
 
     .exchange-modal-title {
-        max-width: 320px;
-        font-size: 20px;
-        line-height: 1.16;
+        max-width: none;
+        font-size: 17px;
+        line-height: 1.14;
     }
 
     .exchange-form {
-        margin-top: 14px;
+        margin-top: 10px;
         padding-inline: 0;
     }
 
     .exchange-field + .exchange-field {
-        margin-top: 12px;
+        margin-top: 9px;
     }
 
     .exchange-field input {
-        height: 56px;
-        padding: 0 16px;
-        font-size: 16px;
+        height: 46px;
+        padding: 0 14px;
+        font-size: 15px;
         border-radius: 10px;
     }
 
     .exchange-actions {
-        margin-top: 16px;
+        margin-top: 12px;
         grid-template-columns: 1fr 1fr;
-        gap: 10px;
+        gap: 8px;
     }
 
     .exchange-action {
-        min-height: 50px;
-        font-size: 16px;
+        min-height: 44px;
+        font-size: 15px;
     }
 }
 
