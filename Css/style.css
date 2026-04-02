@@ -37,6 +37,10 @@
     --office-title-size: 24px;
     --office-title-line: 32px;
     --office-title-color: #d6a11c;
+    --office-title-top-gap: 16px;
+    --office-address-gap: 8px;
+    --office-phone-gap: 16px;
+    --office-email-gap: 6px;
     --office-address-size: 18px;
     --office-address-line: 22px;
     --office-address-color: #1c1c1c;
@@ -406,7 +410,7 @@ button {
 
 .office-section {
     min-height: var(--office-height);
-    padding: 16px 0 0;
+    padding: 0;
 }
 
 .office-section > * {
@@ -416,6 +420,7 @@ button {
 }
 
 .office-name {
+    margin-top: var(--office-title-top-gap);
     width: var(--office-title-width);
     max-width: 100%;
     font-size: var(--office-title-size);
@@ -425,7 +430,7 @@ button {
 }
 
 .office-address {
-    margin-top: 8px;
+    margin-top: var(--office-address-gap);
     font-size: var(--office-address-size);
     line-height: var(--office-address-line);
     font-weight: 400;
@@ -435,7 +440,7 @@ button {
 .office-phone,
 .office-email {
     display: block;
-    margin-top: 12px;
+    margin-top: var(--office-phone-gap);
     font-size: var(--office-contact-size);
     line-height: var(--office-contact-line);
     font-weight: 500;
@@ -443,7 +448,7 @@ button {
 }
 
 .office-email {
-    margin-top: 6px;
+    margin-top: var(--office-email-gap);
 }
 
 .bottom-social-section {
