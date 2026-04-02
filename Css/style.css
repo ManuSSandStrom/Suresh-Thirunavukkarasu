@@ -27,7 +27,8 @@
     --intro-degree-gap: 6px;
     --role-block-height: 70px;
     --role-top-gap: 19px;
-    --role-bottom-gap: 19px;
+    --summary-top-gap: 19px;
+    --role-bottom-gap: 18.5px;
     --role-row-width: 328px;
     --role-title-size: 24px;
     --role-title-line: 32px;
@@ -266,7 +267,7 @@ button {
 }
 
 .profile-summary {
-    margin-top: var(--role-bottom-gap);
+    margin-top: var(--summary-top-gap);
     width: var(--summary-width);
     max-width: 100%;
     min-height: var(--summary-height);
@@ -281,7 +282,7 @@ button {
     grid-template-columns: 1fr auto;
     gap: 16px;
     min-height: var(--contact-block-height);
-    padding: 20px 0 18px;
+    padding: 18px 0 18px;
 }
 
 .contact-list {
@@ -316,7 +317,7 @@ button {
     align-items: center;
     gap: 12px;
     align-self: start;
-    margin-top: 3px;
+    margin-top: 2px;
 }
 
 .social-icon-link {
