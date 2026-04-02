@@ -4,8 +4,8 @@
     --text-main: #2b221b;
     --text-subtle: #9f9f9f;
     --text-body: #5c5c5c;
-    --text-link: #344c72;
-    --accent: #d19a1f;
+    --text-link: #0f2c5d;
+    --accent: #d6a11c;
     --divider: #ececec;
     --shadow: 0 18px 48px rgba(0, 0, 0, 0.22);
     --card-width: 500px;
@@ -24,6 +24,29 @@
     --phone-text-size: 20px;
     --phone-text-line: 26px;
     --action-block-height: 90px;
+    --office-width: 340px;
+    --office-height: 172px;
+    --office-title-width: 275px;
+    --office-title-size: 24px;
+    --office-title-line: 32px;
+    --office-title-color: #d6a11c;
+    --office-address-size: 18px;
+    --office-address-line: 22px;
+    --office-address-color: #1c1c1c;
+    --office-contact-size: 18px;
+    --office-contact-line: 22px;
+    --office-contact-color: #1c1c1c;
+    --social-row-height: 70px;
+    --social-row-width: 84px;
+    --social-icon-size: 24px;
+    --social-gap: 6px;
+    --map-icon-size: 19px;
+    --website-row-height: 70px;
+    --website-font-size: 20px;
+    --website-line: 24px;
+    --website-color: #202020;
+    --website-width: 232px;
+    --footer-row-height: 90px;
 }
 
 * {
@@ -365,47 +388,49 @@ button {
 }
 
 .office-section {
-    min-height: 172px;
-    padding: 18px 0 16px;
+    min-height: var(--office-height);
+    padding: 16px 0 0;
 }
 
 .office-section > * {
-    width: 340px;
+    width: var(--office-width);
     max-width: 100%;
     margin-left: 10px;
 }
 
 .office-name {
-    font-size: 18px;
-    line-height: 24px;
+    width: var(--office-title-width);
+    max-width: 100%;
+    font-size: var(--office-title-size);
+    line-height: var(--office-title-line);
     font-weight: 700;
-    color: var(--accent);
+    color: var(--office-title-color);
 }
 
 .office-address {
     margin-top: 8px;
-    font-size: 14px;
-    line-height: 20px;
-    font-weight: 700;
-    color: #5e5e5e;
+    font-size: var(--office-address-size);
+    line-height: var(--office-address-line);
+    font-weight: 400;
+    color: var(--office-address-color);
 }
 
 .office-phone,
 .office-email {
     display: block;
-    margin-top: 10px;
-    font-size: 14px;
-    line-height: 1.25;
-    font-weight: 700;
-    color: #3f3f3f;
+    margin-top: 12px;
+    font-size: var(--office-contact-size);
+    line-height: var(--office-contact-line);
+    font-weight: 500;
+    color: var(--office-contact-color);
 }
 
 .office-email {
-    margin-top: 4px;
+    margin-top: 6px;
 }
 
 .bottom-social-section {
-    min-height: 70px;
+    min-height: var(--social-row-height);
     padding: 0;
     display: flex;
     align-items: center;
@@ -418,40 +443,44 @@ button {
 }
 
 .map-link {
-    width: 25px;
-    flex: 0 0 25px;
+    width: var(--map-icon-size);
+    flex: 0 0 var(--map-icon-size);
     margin-left: 10px;
 }
 
 .bottom-socials {
     display: flex;
     align-items: center;
-    gap: 12px;
+    width: var(--social-row-width);
+    justify-content: space-between;
+    gap: var(--social-gap);
     margin-right: 0;
 }
 
 .bottom-social-link {
-    width: 24px;
-    height: 24px;
+    width: var(--social-icon-size);
+    height: var(--social-icon-size);
 }
 
 .website-section {
-    min-height: 70px;
+    min-height: var(--website-row-height);
     padding: 0;
     display: flex;
     align-items: center;
 }
 
 .website-link {
-    font-size: 18px;
-    line-height: 24px;
-    font-weight: 700;
-    color: #3f3f3f;
+    width: var(--website-width);
+    max-width: 100%;
+    font-size: var(--website-font-size);
+    line-height: var(--website-line);
+    font-weight: 500;
+    color: var(--website-color);
     margin-left: 10px;
 }
 
 .footer-section {
-    min-height: 90px;
+    min-height: var(--footer-row-height);
     padding: 0;
     border-top: 0;
 }
@@ -460,7 +489,7 @@ button {
     display: flex;
     align-items: center;
     width: 100%;
-    min-height: 90px;
+    min-height: var(--footer-row-height);
     padding: 0 40px;
     justify-content: space-between;
 }
