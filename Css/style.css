@@ -772,33 +772,42 @@ button {
 }
 
 .copy-url-button {
-    width: min(205px, calc(100% - 52px));
-    flex: 0 1 min(205px, calc(100% - 52px));
+    width: 205px;
+    flex: 0 0 205px;
     height: 40px;
     min-height: 40px;
-    padding: 0 16px 0 14px;
-    border-radius: 20px;
-    background: #f3f2ef;
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 0;
     justify-content: flex-start;
-    color: #242424;
-    font-size: 14px;
-    line-height: 1.15;
-    font-weight: 500;
-    letter-spacing: -0.01em;
+    color: inherit;
+    font-size: 0;
+    line-height: 0;
+    font-weight: 400;
+    letter-spacing: 0;
 }
 
 .copy-url-button span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
     white-space: nowrap;
+    border: 0;
 }
 
 .copy-url-button img {
-    width: 20px;
-    height: 20px;
-    flex: 0 0 20px;
-    filter: grayscale(1) brightness(0.72) contrast(0.9);
+    display: block;
+    width: 205px;
+    height: 40px;
+    flex: 0 0 205px;
+    filter: none;
     opacity: 1;
 }
 
@@ -1296,20 +1305,16 @@ button {
     }
 
     .copy-url-button {
-        width: min(205px, calc(100% - 50px));
-        flex: 0 1 min(205px, calc(100% - 50px));
+        width: 205px;
+        flex: 0 0 205px;
         min-height: 40px;
         height: 40px;
-        padding-inline: 14px;
-        gap: 8px;
-        font-size: 14px;
-        line-height: 1.15;
     }
 
     .copy-url-button img {
-        width: 20px;
-        height: 20px;
-        flex-basis: 20px;
+        width: 205px;
+        height: 40px;
+        flex-basis: 205px;
     }
 
     .icon-asset-button,
