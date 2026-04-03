@@ -700,8 +700,8 @@ button {
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    background: #dcefb5;
-    padding: 6px;
+    background: transparent;
+    padding: 0;
     overflow: hidden;
     box-shadow: none;
     z-index: 1;
@@ -718,7 +718,7 @@ button {
 
 .share-modal-body {
     position: relative;
-    padding: 68px 24px 22px;
+    padding: 68px 24px 16px;
 }
 
 .share-modal-body::before {
@@ -764,7 +764,7 @@ button {
 }
 
 .share-modal-tool-row {
-    margin-top: 18px;
+    margin-top: 16px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -828,8 +828,8 @@ button {
 }
 
 .share-modal-share-row {
-    margin-top: 18px;
-    padding-top: 18px;
+    margin-top: 14px;
+    padding-top: 12px;
     border-top: 1px solid #d9d9d9;
     display: flex;
     align-items: center;
@@ -1260,7 +1260,7 @@ button {
     }
 
     .share-modal-body {
-        padding: 54px 18px 18px;
+        padding: 54px 18px 14px;
     }
 
     .share-modal-hero {
@@ -1276,7 +1276,7 @@ button {
         height: 94px;
         right: 12px;
         bottom: -38px;
-        padding: 5px;
+        padding: 0;
     }
 
     .share-modal-title {
@@ -1300,7 +1300,7 @@ button {
     }
 
     .share-modal-tool-row {
-        margin-top: 12px;
+        margin-top: 10px;
         gap: 12px;
     }
 
@@ -1324,8 +1324,8 @@ button {
     }
 
     .share-modal-share-row {
-        margin-top: 18px;
-        padding-top: 18px;
+        margin-top: 12px;
+        padding-top: 10px;
         display: flex;
         align-items: center;
         justify-content: space-between;
