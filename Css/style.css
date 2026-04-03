@@ -86,11 +86,11 @@
     --footer-inline-pad: 10px;
     --footer-powered-text-width: 83.05px;
     --footer-powered-text-height: 8.59px;
-    --footer-lawmines-width: 132px;
-    --footer-lawmines-height: 45.2px;
-    --footer-good-width: 68px;
-    --footer-good-height: 24.19px;
-    --footer-brand-gap: 28px;
+    --footer-lawmines-width: auto;
+    --footer-lawmines-height: 44px;
+    --footer-good-width: auto;
+    --footer-good-height: 44px;
+    --footer-brand-gap: 24px;
 }
 
 * {
