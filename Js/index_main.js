@@ -392,14 +392,14 @@ function buildShareLinks() {
             href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`
         },
         {
-            icon: "email_icon.svg",
-            label: "Share via Email",
-            href: `mailto:?subject=${encodeURIComponent(shareTitle)}&body=${encodeURIComponent(`Take a look at this digital card:\n${shareUrl}`)}`
+            icon: "xcom_icon.svg",
+            label: "Share via X",
+            href: `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`
         },
         {
-            icon: "global_icon.svg",
-            label: "Open digital card",
-            href: shareUrl
+            icon: "facebook_icon.svg",
+            label: "Share via Facebook",
+            href: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`
         }
     ] : [];
 
