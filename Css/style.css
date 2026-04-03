@@ -44,9 +44,9 @@
     --contact-top-gap: 21px;
     --contact-bottom-gap: 24px;
     --contact-row-gap: 8px;
-    --top-socials-width: 75px;
-    --top-socials-height: 30px;
-    --top-socials-gap: 7px;
+    --top-socials-width: auto;
+    --top-socials-height: var(--social-icon-size);
+    --top-socials-gap: var(--social-gap);
     --phone-text-size: 20px;
     --phone-text-line: 26px;
     --action-block-height: 90px;
@@ -73,9 +73,9 @@
     --office-contact-line: 22px;
     --office-contact-color: #1c1c1c;
     --social-row-height: 70px;
-    --social-row-width: 84px;
-    --social-icon-size: 24px;
-    --social-gap: 6px;
+    --social-row-width: auto;
+    --social-icon-size: 32px;
+    --social-gap: 10px;
     --map-icon-size: 19px;
     --website-row-height: 70px;
     --website-font-size: 20px;
@@ -348,9 +348,22 @@ button {
     margin-top: 1px;
 }
 
-.social-icon-link {
-    width: 24px;
-    height: 24px;
+.social-icon-link,
+.bottom-social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--social-icon-size);
+    height: var(--social-icon-size);
+    flex: 0 0 var(--social-icon-size);
+}
+
+.social-icon-link img,
+.bottom-social-link img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .action-section {
@@ -526,14 +539,9 @@ button {
     display: flex;
     align-items: center;
     width: var(--social-row-width);
-    justify-content: space-between;
+    justify-content: flex-end;
     gap: var(--social-gap);
     margin-right: 0;
-}
-
-.bottom-social-link {
-    width: var(--social-icon-size);
-    height: var(--social-icon-size);
 }
 
 .website-section {
