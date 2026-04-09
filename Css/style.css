@@ -597,6 +597,7 @@ button {
 .footer-link {
     display: flex;
     align-items: center;
+    min-width: 0;
 }
 
 .powered-by-text {
@@ -1390,6 +1391,38 @@ button {
     .exchange-action {
         min-height: 44px;
         font-size: 15px;
+    }
+}
+
+@media (max-width: 360px) {
+    .footer-section {
+        flex-wrap: wrap;
+        justify-content: center;
+        row-gap: 12px;
+    }
+
+    .footer-meta.is-empty {
+        display: none !important;
+    }
+
+    .powered-by-text-container {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .footer-links-container {
+        width: 100%;
+        justify-content: center;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .footer-primary-image {
+        max-height: 30px;
+    }
+
+    .footer-secondary-image {
+        max-height: 30px;
     }
 }
 
