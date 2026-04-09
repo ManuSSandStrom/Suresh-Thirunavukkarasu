@@ -1,6 +1,6 @@
 {
     "assetBasePath": "./Assets",
-    "publicUrl": "https://www.lawmines.com/",
+    "publicUrl": "",
     "pageTitle": "Suresh Thirunavukkarasu | Advocate",
     "pageDescription": "Digital profile card for Advocate Suresh Thirunavukkarasu.",
     "favicon": "favicon.svg",
@@ -8,14 +8,14 @@
     "shareBannerImage": "QRCode_Banner.svg",
     "profilePhoto": "Profile/+918825498580.png",
     "previewImage": "Profile/preview-card.png",
-    "previewImagePublicUrl": "https://www.lawmines.com/Assets/Profile/preview-card.png",
+    "previewImagePublicUrl": "",
     "previewImageAlt": "Suresh Thirunavukkarasu portrait",
     "lawIcon": "LawIcon.svg",
     "nameHtml": "Suresh<br>Thirunavukkarasu",
     "degree": "B.C.A., B.L.,",
     "profession": "Advocate",
     "practiceArea": "Civil",
-    "summary": "Seeking challanging assignments in Legal Affairs with a reputed organization where I can become an indispensable contributor.",
+    "summary": "Seeking challenging assignments in Legal Affairs with a reputed organization where I can become an indispensable contributor.",
     "phones": [
         {
             "label": "+91 882 549 8580",
@@ -32,17 +32,12 @@
     },
     "topSocials": [
         {
-            "icon": "linkedin_icon.svg",
-            "label": "LinkedIn",
-            "href": "https://www.linkedin.com/"
-        },
-        {
             "icon": "whatsapp_icon.svg",
             "label": "WhatsApp",
             "href": "https://wa.me/918825498580"
         }
     ],
-    "shareHref": "https://www.lawmines.com/",
+    "shareHref": "",
     "exchangeContactHref": "https://wa.me/918825498580",
     "vcardFile": "Profile/+918825498580.vcf",
     "services": [
@@ -65,24 +60,11 @@
     },
     "mapLink": "https://maps.google.com/?q=No.19+Poosali+Ramaswamy+Street+Kaveripakkam+Nemili+Taluk+Ranipet+District",
     "website": {
-        "label": "www.lawmines.com",
-        "href": "https://www.lawmines.com/"
+        "label": "",
+        "href": ""
     },
-    "bottomSocials": [
-        {
-            "icon": "linkedin_icon.svg",
-            "label": "LinkedIn",
-            "href": "https://www.linkedin.com/"
-        },
-        {
-            "icon": "Instagram_icon.svg",
-            "label": "Instagram",
-            "href": "https://www.instagram.com/"
-        },
-        {
-            "icon": "youtube_icon.svg",
-            "label": "YouTube",
-            "href": "https://www.youtube.com/"
-        }
-    ]
+    "bottomSocials": [],
+    "footerBrandImage": "Poweredby.svg",
+    "footerBrandAlt": "By Suresh Thirunavukkarasu and GoodUX",
+    "footerBrandLink": "https://goodux.in/"
 }

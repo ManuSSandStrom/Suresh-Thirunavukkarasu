@@ -85,6 +85,15 @@ function getPublicAssetUrl(path) {
     }
 }
 
+function toggleVisibility(nodeOrId, shouldShow) {
+    const node = typeof nodeOrId === "string" ? document.getElementById(nodeOrId) : nodeOrId;
+    if (!node) {
+        return;
+    }
+
+    node.hidden = !shouldShow;
+}
+
 function createContactItem(iconPath, label, href) {
     const item = document.createElement("a");
     item.className = "contact-item";
@@ -100,6 +109,12 @@ function createContactItem(iconPath, label, href) {
     text.textContent = label || "";
 
     item.append(icon, text);
+
+    if (/^https?:\/\//i.test(item.href)) {
+        item.target = "_blank";
+        item.rel = "noreferrer";
+    }
+
     return item;
 }
 
@@ -111,7 +126,9 @@ function populateLinks(containerId, items, itemClassName) {
 
     container.innerHTML = "";
 
-    (items || []).forEach((item) => {
+    const validItems = (items || []).filter((item) => item?.href && item?.icon);
+
+    validItems.forEach((item) => {
         if (!item?.href || !item?.icon) {
             return;
         }
@@ -130,6 +147,8 @@ function populateLinks(containerId, items, itemClassName) {
         link.appendChild(icon);
         container.appendChild(link);
     });
+
+    toggleVisibility(container, validItems.length > 0);
 }
 
 function populateServices(items) {
@@ -140,21 +159,31 @@ function populateServices(items) {
 
     list.innerHTML = "";
 
-    (items || []).forEach((item) => {
+    const validItems = (items || []).filter((item) => `${item || ""}`.trim());
+
+    validItems.forEach((item) => {
         const li = document.createElement("li");
         li.textContent = item;
         list.appendChild(li);
     });
+
+    toggleVisibility(list.closest(".service-section"), validItems.length > 0);
 }
 
 function setImage(id, path, alt = "") {
     const node = document.getElementById(id);
-    if (!node || !path) {
+    if (!node) {
+        return;
+    }
+
+    if (!path) {
+        toggleVisibility(node, false);
         return;
     }
 
     node.src = resolveAssetPath(path);
     node.alt = alt;
+    toggleVisibility(node, true);
 }
 
 function setLink(id, href, text) {
@@ -163,13 +192,30 @@ function setLink(id, href, text) {
         return;
     }
 
+    const hasHref = `${href || ""}`.trim();
+    const hasText = typeof text === "string" ? text.trim() : "";
+
+    if (!hasHref && !hasText) {
+        toggleVisibility(node, false);
+        return;
+    }
+
     if (href) {
         node.href = href;
+        if (/^https?:\/\//i.test(href)) {
+            node.target = "_blank";
+            node.rel = "noreferrer";
+        } else {
+            node.removeAttribute("target");
+            node.removeAttribute("rel");
+        }
     }
 
     if (typeof text === "string") {
         node.textContent = text;
     }
+
+    toggleVisibility(node, true);
 }
 
 function setStatus(nodeId, message) {
@@ -276,13 +322,19 @@ function updateSocialMetadata() {
     const pageUrl = getCardUrl();
     const previewImage = profileData?.previewImagePublicUrl || getPublicAssetUrl(profileData?.previewImage || profileData?.profilePhoto);
     const previewImageAlt = profileData?.previewImageAlt || `${getPlainName()} portrait`;
+    const siteName = profileData?.siteName || profileData?.officeName || getPlainName();
 
     const canonicalLink = document.getElementById("canonical-link");
-    if (canonicalLink && pageUrl) {
-        canonicalLink.href = pageUrl;
+    if (canonicalLink) {
+        if (pageUrl) {
+            canonicalLink.href = pageUrl;
+        } else {
+            canonicalLink.removeAttribute("href");
+        }
     }
 
     updateMetaTag('meta[name="twitter:card"]', "summary_large_image");
+    updateMetaTag('meta[property="og:site_name"]', siteName);
     updateMetaTag('meta[property="og:title"]', pageTitle);
     updateMetaTag('meta[property="og:description"]', pageDescription);
     updateMetaTag('meta[property="og:url"]', pageUrl);
@@ -424,7 +476,7 @@ function buildShareLinks() {
 
 function populateModals() {
     setImage("share-modal-banner", profileData?.shareBannerImage || "QRCode_Banner.svg", "");
-    setImage("share-modal-avatar", profileData?.profilePhoto, "Suresh Thirunavukkarasu portrait");
+    setImage("share-modal-avatar", profileData?.profilePhoto, `${getPlainName()} portrait`);
 
     const shareModalTitle = document.getElementById("share-modal-title");
     const shareSubrole = document.getElementById("share-modal-subrole");
@@ -589,11 +641,9 @@ function populateCard() {
     updateSocialMetadata();
 
     setImage("banner-image", data.bannerImage, "Law office banner");
-    setImage("profile-image", data.profilePhoto, "Suresh Thirunavukkarasu portrait");
+    setImage("profile-image", data.profilePhoto, `${getPlainName()} portrait`);
     setImage("law-icon", data.lawIcon, "");
-    setImage("powered-by-text-image", "PowerbyTxt.svg", "Powered by");
-    setImage("powered-by-lawmines-image", "PoweredbyLawMines.svg", "Lawmines");
-    setImage("powered-by-good-image", "PoweredbyGoodUX.svg", "Good");
+    setImage("powered-by-image", data.footerBrandImage, data.footerBrandAlt || "By");
 
     const nameNode = document.getElementById("name-html");
     if (nameNode) {
@@ -636,6 +686,8 @@ function populateCard() {
     populateLinks("top-socials", data.topSocials, "social-icon-link");
     populateLinks("bottom-socials", data.bottomSocials, "bottom-social-link");
     populateServices(data.services);
+    toggleVisibility("contact-list", contactList?.childElementCount > 0);
+    toggleVisibility(document.querySelector(".contact-section"), (contactList?.childElementCount || 0) > 0 || document.getElementById("top-socials")?.childElementCount > 0);
 
     const officeNameNode = document.getElementById("office-name-text");
     if (officeNameNode) {
@@ -651,7 +703,15 @@ function populateCard() {
     setLink("office-email-link", data.officeEmail?.href, data.officeEmail?.label || "");
     setLink("map-link", data.mapLink);
     setLink("website-link", data.website?.href, data.website?.label || "");
-    setLink("powered-by-link", data.website?.href);
+    setLink("powered-by-link", data.footerBrandLink || data.website?.href);
+    toggleVisibility("website-section", !!(`${data.website?.href || ""}`.trim() || `${data.website?.label || ""}`.trim()));
+    toggleVisibility("footer-section", !!data.footerBrandImage);
+    toggleVisibility("bottom-social-section", !!(`${data.mapLink || ""}`.trim()) || document.getElementById("bottom-socials")?.childElementCount > 0);
+    toggleVisibility(document.getElementById("office-phone-link"), !!(`${data.officePhone?.href || ""}`.trim() || `${data.officePhone?.label || ""}`.trim()));
+    toggleVisibility(document.getElementById("office-email-link"), !!(`${data.officeEmail?.href || ""}`.trim() || `${data.officeEmail?.label || ""}`.trim()));
+    toggleVisibility(document.getElementById("office-address-html"), !!`${data.officeAddressHtml || ""}`.trim());
+    toggleVisibility(document.getElementById("office-name-text"), !!`${data.officeName || ""}`.trim());
+    toggleVisibility(document.querySelector(".office-section"), !!`${data.officeName || data.officeAddressHtml || data.officePhone?.label || data.officeEmail?.label || ""}`.trim());
 
     const downloadProfileButton = document.getElementById("download-profile-button");
     if (downloadProfileButton) {
