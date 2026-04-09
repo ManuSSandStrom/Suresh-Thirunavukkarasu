@@ -83,8 +83,10 @@
     --website-width: 232px;
     --footer-row-height: 90px;
     --footer-inline-pad: 10px;
-    --footer-brand-width: 170.8px;
-    --footer-brand-height: 35px;
+    --footer-text-width: 83.052px;
+    --footer-primary-height: 44px;
+    --footer-secondary-height: 40px;
+    --footer-brand-gap: 18px;
 }
 
 * {
@@ -560,28 +562,62 @@ button {
 
 .footer-section {
     min-height: var(--footer-row-height);
-    padding: 0;
+    padding: 25px 0;
     border-top: 1px solid var(--divider);
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    gap: 10px;
 }
 
-.powered-by-group {
+.footer-meta {
+    font-family: "Roboto", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 10px;
+    line-height: 1.2;
+    color: #2e2e2e;
+    opacity: 0.4;
+    align-self: center;
+    min-width: 84px;
+}
+
+.footer-meta.is-empty {
+    visibility: hidden;
+}
+
+.powered-by-text-container,
+.footer-links-container {
     display: flex;
     align-items: center;
-    width: var(--content-width);
-    max-width: 100%;
-    margin-inline: auto;
-    min-height: var(--footer-row-height);
-    padding: 0 var(--footer-inline-pad);
-    justify-content: center;
 }
 
-.powered-by-combined {
-    width: min(100%, var(--footer-brand-width));
+.footer-links-container {
+    gap: var(--footer-brand-gap);
+}
+
+.footer-link {
+    display: flex;
+    align-items: center;
+}
+
+.powered-by-text {
+    width: var(--footer-text-width);
     height: auto;
-    max-height: var(--footer-brand-height);
     flex: 0 0 auto;
+}
+
+.footer-primary-image,
+.footer-secondary-image {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+}
+
+.footer-primary-image {
+    max-height: var(--footer-primary-height);
+}
+
+.footer-secondary-image {
+    max-height: var(--footer-secondary-height);
 }
 
 .modal-layer {
@@ -1187,14 +1223,24 @@ button {
         margin-left: 0;
     }
 
-    .powered-by-group {
-        padding-inline: 0;
-        min-height: 74px;
+    .footer-section {
+        padding: 22px 0;
     }
 
-    .powered-by-combined {
-        width: min(100%, 170px);
-        max-height: 35px;
+    .footer-meta {
+        min-width: 70px;
+    }
+
+    .footer-links-container {
+        gap: 14px;
+    }
+
+    .footer-primary-image {
+        max-height: 34px;
+    }
+
+    .footer-secondary-image {
+        max-height: 34px;
     }
 
     .modal-layer {

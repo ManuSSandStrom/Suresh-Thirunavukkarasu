@@ -64,7 +64,13 @@
         "href": ""
     },
     "bottomSocials": [],
-    "footerBrandImage": "Poweredby.svg",
-    "footerBrandAlt": "By Suresh Thirunavukkarasu and GoodUX",
-    "footerBrandLink": "https://goodux.in/"
+    "footerMetaText": "",
+    "footerTextImage": "PowerbyTxt.svg",
+    "footerTextAlt": "Powered by",
+    "footerPrimaryImage": "Customer_Logo.svg",
+    "footerPrimaryAlt": "Suresh Thirunavukkarasu",
+    "footerPrimaryLink": "",
+    "footerSecondaryImage": "PoweredbyGoodUX.svg",
+    "footerSecondaryAlt": "GoodUX",
+    "footerSecondaryLink": "https://goodux.in/"
 }

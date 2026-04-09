@@ -218,6 +218,32 @@ function setLink(id, href, text) {
     toggleVisibility(node, true);
 }
 
+function setAnchorHref(id, href, shouldShow = true) {
+    const node = document.getElementById(id);
+    if (!node) {
+        return;
+    }
+
+    const cleanHref = `${href || ""}`.trim();
+
+    if (cleanHref) {
+        node.href = cleanHref;
+        if (/^https?:\/\//i.test(cleanHref)) {
+            node.target = "_blank";
+            node.rel = "noreferrer";
+        } else {
+            node.removeAttribute("target");
+            node.removeAttribute("rel");
+        }
+    } else {
+        node.removeAttribute("href");
+        node.removeAttribute("target");
+        node.removeAttribute("rel");
+    }
+
+    toggleVisibility(node, shouldShow);
+}
+
 function setStatus(nodeId, message) {
     const statusNode = document.getElementById(nodeId);
     if (!statusNode) {
@@ -643,7 +669,9 @@ function populateCard() {
     setImage("banner-image", data.bannerImage, "Law office banner");
     setImage("profile-image", data.profilePhoto, `${getPlainName()} portrait`);
     setImage("law-icon", data.lawIcon, "");
-    setImage("powered-by-image", data.footerBrandImage, data.footerBrandAlt || "By");
+    setImage("powered-by-text-image", data.footerTextImage, data.footerTextAlt || "Powered by");
+    setImage("footer-primary-image", data.footerPrimaryImage, data.footerPrimaryAlt || getPlainName());
+    setImage("footer-secondary-image", data.footerSecondaryImage, data.footerSecondaryAlt || "GoodUX");
 
     const nameNode = document.getElementById("name-html");
     if (nameNode) {
@@ -703,9 +731,20 @@ function populateCard() {
     setLink("office-email-link", data.officeEmail?.href, data.officeEmail?.label || "");
     setLink("map-link", data.mapLink);
     setLink("website-link", data.website?.href, data.website?.label || "");
-    setLink("powered-by-link", data.footerBrandLink || data.website?.href);
+    setAnchorHref("footer-primary-link", data.footerPrimaryLink, !!`${data.footerPrimaryImage || ""}`.trim());
+    setAnchorHref("footer-secondary-link", data.footerSecondaryLink, !!`${data.footerSecondaryImage || ""}`.trim());
+
+    const footerMetaNode = document.getElementById("footer-meta-text");
+    if (footerMetaNode) {
+        const metaText = `${data.footerMetaText || ""}`.trim();
+        footerMetaNode.textContent = metaText;
+        footerMetaNode.classList.toggle("is-empty", !metaText);
+    }
+
+    toggleVisibility("powered-by-text-container", !!`${data.footerTextImage || ""}`.trim());
+    toggleVisibility("footer-links-container", document.getElementById("footer-primary-link")?.hidden === false || document.getElementById("footer-secondary-link")?.hidden === false);
     toggleVisibility("website-section", !!(`${data.website?.href || ""}`.trim() || `${data.website?.label || ""}`.trim()));
-    toggleVisibility("footer-section", !!data.footerBrandImage);
+    toggleVisibility("footer-section", !!(`${data.footerTextImage || ""}`.trim() || `${data.footerPrimaryImage || ""}`.trim() || `${data.footerSecondaryImage || ""}`.trim()));
     toggleVisibility("bottom-social-section", !!(`${data.mapLink || ""}`.trim()) || document.getElementById("bottom-socials")?.childElementCount > 0);
     toggleVisibility(document.getElementById("office-phone-link"), !!(`${data.officePhone?.href || ""}`.trim() || `${data.officePhone?.label || ""}`.trim()));
     toggleVisibility(document.getElementById("office-email-link"), !!(`${data.officeEmail?.href || ""}`.trim() || `${data.officeEmail?.label || ""}`.trim()));
