@@ -86,7 +86,7 @@
     --footer-text-width: 83.052px;
     --footer-primary-height: 44px;
     --footer-secondary-height: 40px;
-    --footer-brand-gap: 18px;
+    --footer-brand-gap: 24px;
 }
 
 * {
@@ -570,6 +570,11 @@ button {
     gap: 10px;
 }
 
+.footer-section.footer-centered {
+    justify-content: center;
+    gap: var(--footer-brand-gap);
+}
+
 .footer-meta {
     font-family: "Roboto", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     font-size: 10px;
@@ -582,6 +587,10 @@ button {
 
 .footer-meta.is-empty {
     visibility: hidden;
+}
+
+.footer-section.footer-centered .footer-meta.is-empty {
+    display: none !important;
 }
 
 .powered-by-text-container,

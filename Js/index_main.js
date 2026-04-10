@@ -735,10 +735,12 @@ function populateCard() {
     setAnchorHref("footer-secondary-link", data.footerSecondaryLink, !!`${data.footerSecondaryImage || ""}`.trim());
 
     const footerMetaNode = document.getElementById("footer-meta-text");
+    const footerSectionNode = document.getElementById("footer-section");
     if (footerMetaNode) {
         const metaText = `${data.footerMetaText || ""}`.trim();
         footerMetaNode.textContent = metaText;
         footerMetaNode.classList.toggle("is-empty", !metaText);
+        footerSectionNode?.classList.toggle("footer-centered", !metaText);
     }
 
     toggleVisibility("powered-by-text-container", !!`${data.footerTextImage || ""}`.trim());
